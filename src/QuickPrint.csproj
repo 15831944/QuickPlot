@@ -62,12 +62,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoCAD\notes.cs" />
     <Compile Include="AutoShutdownPrompt.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AutoShutdownPrompt.Designer.cs">
       <DependentUpon>AutoShutdownPrompt.cs</DependentUpon>
     </Compile>
+    <Compile Include="CTB\notes.cs" />
+    <Compile Include="IO\notes.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobDialog.cs">
       <SubType>Form</SubType>
@@ -140,6 +143,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Security\notes.cs" />
     <Compile Include="SelectFolderDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,9 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\MainToolbar_DefaultDownloadOptions.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\splash.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\splash.png" />
