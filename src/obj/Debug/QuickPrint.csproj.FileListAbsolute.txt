@@ -17,7 +17,6 @@ C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\QuickPrint.exe
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\QuickPrint.pdb
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\bin\Debug\QuickPrint.exe
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\bin\Debug\QuickPrint.pdb
-C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\QuickPrint.csprojResolveAssemblyReference.cache
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\VisualWget.AutoShutdownPrompt.resources
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\VisualWget.JobDialog.resources
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\VisualWget.MainForm.resources

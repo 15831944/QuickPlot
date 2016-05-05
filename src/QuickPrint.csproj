@@ -63,13 +63,46 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoCAD\notes.cs" />
+    <Compile Include="AutoCAD\Sheet.cs" />
     <Compile Include="AutoShutdownPrompt.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AutoShutdownPrompt.Designer.cs">
       <DependentUpon>AutoShutdownPrompt.cs</DependentUpon>
     </Compile>
+    <Compile Include="CTB\Crc\CRC32.cs" />
+    <Compile Include="CTB\Crc\CrcCalculatorStream.cs" />
     <Compile Include="CTB\notes.cs" />
+    <Compile Include="CTB\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="CTB\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="CTB\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="CTB\Zlib\Adler.cs" />
+    <Compile Include="CTB\Zlib\BlockState.cs" />
+    <Compile Include="CTB\Zlib\CompressionLevel.cs" />
+    <Compile Include="CTB\Zlib\CompressionMode.cs" />
+    <Compile Include="CTB\Zlib\CompressionStrategy.cs" />
+    <Compile Include="CTB\Zlib\DeflateFlavor.cs" />
+    <Compile Include="CTB\Zlib\DeflateManager.cs" />
+    <Compile Include="CTB\Zlib\DeflateStream.cs" />
+    <Compile Include="CTB\Zlib\FlushType.cs" />
+    <Compile Include="CTB\Zlib\GZipStream.cs" />
+    <Compile Include="CTB\Zlib\InflateBlocks.cs" />
+    <Compile Include="CTB\Zlib\InflateCodes.cs" />
+    <Compile Include="CTB\Zlib\InflateManager.cs" />
+    <Compile Include="CTB\Zlib\InfTree.cs" />
+    <Compile Include="CTB\Zlib\InternalConstants.cs" />
+    <Compile Include="CTB\Zlib\InternalInflateConstants.cs" />
+    <Compile Include="CTB\Zlib\ParallelDeflateOutputStream.cs" />
+    <Compile Include="CTB\Zlib\SharedUtils.cs" />
+    <Compile Include="CTB\Zlib\StaticTree.cs" />
+    <Compile Include="CTB\Zlib\Tree.cs" />
+    <Compile Include="CTB\Zlib\WorkItem.cs" />
+    <Compile Include="CTB\Zlib\ZlibBaseStream.cs" />
+    <Compile Include="CTB\Zlib\ZlibCodec.cs" />
+    <Compile Include="CTB\Zlib\ZlibConstants.cs" />
+    <Compile Include="CTB\Zlib\ZlibException.cs" />
+    <Compile Include="CTB\Zlib\ZlibStream.cs" />
+    <Compile Include="CTB\Zlib\ZlibStreamFlavor.cs" />
     <Compile Include="IO\notes.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobDialog.cs">
@@ -158,6 +191,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="CTB\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="CTB\obj\Debug\EnesyPlotSytleEditor.csprojResolveAssemblyReference.cache" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -230,7 +265,13 @@
     <None Include="Resources\MainToolbar_DefaultDownloadOptions.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CTB\obj\Debug\EnesyCTBEditor.dll" />
+    <Content Include="CTB\obj\Debug\EnesyCTBEditor.pdb" />
+    <Content Include="CTB\obj\Debug\EnesyPlotSytleEditor.csproj.FileListAbsolute.txt" />
     <Content Include="Resources\splash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CTB\obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
