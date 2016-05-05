@@ -26,11 +26,15 @@ Chú giải cho chức năng này
 # Nguyên tắc
 Giao diện người dùng càng đơn giản càng tốt
 #Cấu trúc thư mục
-##AutoCAD
+##CADAutomation
+Thư mục này dùng để tham khảo code tương tác out process với AutoCAD
+##src
+Thư mục chứa mã của QuickPrint
+###AutoCAD
 Tất cả code thao tác với AutoCAD sẽ được đặt ở trong thư mục này
-##CTB
+###CTB
 Tất cả code thao tác với file *.ctb sẽ được đặt ở đây
-##IO
+###IO
 Tất cả code thao tác I/O sẽ được đặt ở đây
-##Security
+###Security
 Tất cả code bảo mật chương trình ở đây
