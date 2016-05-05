@@ -1,10 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: Ionic.Zlib.GZipStream
-// Assembly: PlotStyleViewer2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 12B42B16-55A3-4EDC-A4BC-2618C307E234
-// Assembly location: C:\Setups\PlotStyleViewer2.exe
-
-using System;
+﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
