@@ -38,3 +38,5 @@ Tất cả code thao tác với file *.ctb sẽ được đặt ở đây
 Tất cả code thao tác I/O sẽ được đặt ở đây
 ###Security
 Tất cả code bảo mật chương trình ở đây
+#Actions in a galance
+*001: Khi double click chuột vào 1 item trên list, chương trình tự động kiểm tra xem AuoCAD đã được mở chưa, sau đó mở bản vẽ tương ứng và gọi phương thức Print Preview của bản vẽ
