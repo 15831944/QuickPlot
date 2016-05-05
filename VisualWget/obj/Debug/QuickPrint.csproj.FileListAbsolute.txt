@@ -1,0 +1,14 @@
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\bin\Debug\QuickPrint.exe.config
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\bin\Debug\QuickPrint.exe
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\bin\Debug\QuickPrint.pdb
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\obj\Debug\VisualWget.AutoShutdownPrompt.resources
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\obj\Debug\VisualWget.JobDialog.resources
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\obj\Debug\VisualWget.MainForm.resources
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\obj\Debug\VisualWget.NewMultipleJobsDialog.resources
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\obj\Debug\VisualWget.PreferencesDialog.resources
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\obj\Debug\VisualWget.SavePresetDialog.resources
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\obj\Debug\QuickPrint.Properties.Resources.resources
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\obj\Debug\VisualWget.SelectFolderDialog.resources
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\obj\Debug\QuickPrint.csproj.GenerateResource.Cache
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\obj\Debug\QuickPrint.exe
+C:\Data\Projects\C#\Autocad Projects\QuickPrint\VisualWget\obj\Debug\QuickPrint.pdb
