@@ -25,3 +25,12 @@ Chú giải cho chức năng này
 
 # Nguyên tắc
 Giao diện người dùng càng đơn giản càng tốt
+#Cấu trúc thư mục
+##AutoCAD
+Tất cả code thao tác với AutoCAD sẽ được đặt ở trong thư mục này
+##CTB
+Tất cả code thao tác với file *.ctb sẽ được đặt ở đây
+##IO
+Tất cả code thao tác I/O sẽ được đặt ở đây
+##Security
+Tất cả code bảo mật chương trình ở đây
