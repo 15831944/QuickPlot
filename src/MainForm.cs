@@ -16,6 +16,13 @@ using Microsoft.VisualBasic;
 using System.Media;
 using QuickPrint;
 
+#region AutoCAD
+using Autodesk.AutoCAD;
+using Autodesk.AutoCAD.Interop;
+using Autodesk.AutoCAD.Interop.Common;
+using QuickPrint.AutoCAD;
+#endregion
+
 namespace VisualWget
 {
     [StructLayout(LayoutKind.Sequential)]
@@ -791,6 +798,7 @@ namespace VisualWget
             }
 
             //
+            this.TopMost = true;
             AddTest();
         }
 
@@ -799,20 +807,20 @@ namespace VisualWget
         {
             jobsListView.Items.Clear();
 
-            for (int i = 1; i < 100; i++)
+            for (int i = 1; i < 10; i++)
             {
                 Job job = new Job("Girder "+ i);
-                JobDialog jobDialog = new JobDialog(job.Urls, job.Opts);
+                //JobDialog jobDialog = new JobDialog(job.Urls, job.Opts);
 
-                job.Num = jobs.Count + 1;
+                job.Num = i;// jobs.Count + 1;
 
                 DateTime now = DateTime.Now;
 
                 job.LastStartedTime = (new DateTime(now.Year, now.Month, now.Day)).Ticks;
-                job.AutoStartNumDays = jobDialog.AutoStartNumDays;
+                //job.AutoStartNumDays = jobDialog.AutoStartNumDays;
                 job.LastStartedTimeActual = now.Ticks;
-                job.AutoStartNumHours = jobDialog.AutoStartNumHours;
-                job.NoteText = jobDialog.NoteText;
+                //job.AutoStartNumHours = jobDialog.AutoStartNumHours;
+               // job.NoteText = jobDialog.NoteText;
                 jobs.Add(job);
 
                 ListViewItem lvi = NewListViewItem(job);
@@ -4430,5 +4438,154 @@ namespace VisualWget
         {
             ExportJobsAsWgetBatchFile();
         }
+
+        #region Test
+        public static AcadApplication gbl_app;
+        public static AcadDocument gbl_doc;
+        private void menuItem2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                object obj = Marshal.GetActiveObject("AutoCAD.Application.17");
+                if (obj != null)
+                {
+                    gbl_app = obj as AcadApplication;
+                    try
+                    {
+                        gbl_app.ActiveDocument.ActiveLayout.ConfigName = "DWF6 ePlot.pc3";
+                        gbl_app.ActiveDocument.Plot.DisplayPlotPreview(AcPreviewMode.acPartialPreview);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+            }
+        }
+        private void menuItem5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                object obj = Marshal.GetActiveObject("AutoCAD.Application.17");
+                if (obj != null)
+                {
+                    gbl_app = obj as AcadApplication;
+                    try
+                    {
+                        gbl_app.Visible = !gbl_app.Visible;
+                        menuItem5.Checked = gbl_app.Visible == true;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+            }
+            
+        }
+        #endregion
+
+        private void menuItem6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                object obj = Marshal.GetActiveObject("AutoCAD.Application.17");
+                if (obj != null)
+                {
+                    gbl_app = obj as AcadApplication;
+                    try
+                    {
+                        string ssName = "ss";
+                        for (int i = 0; i< gbl_app.ActiveDocument.SelectionSets.Count; i++)
+                        {
+                            if ( gbl_app.ActiveDocument.SelectionSets.Item(i).Name == ssName)
+                            {
+                                gbl_app.ActiveDocument.SelectionSets.Item(i).Delete();
+                                break;
+                            }
+                        }
+
+                        AcadSelectionSet ss1 = gbl_app.ActiveDocument.SelectionSets.Add(ssName);
+                        //
+                        ss1.SelectOnScreen();
+                        foreach (AcadEntity ent in ss1)
+                        {
+                            ent.Highlight(true);
+                            ent.Update();
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+            }
+            
+        }
+
+        private void menuItem7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                object obj = Marshal.GetActiveObject("AutoCAD.Application.17");
+                if (obj != null)
+                {
+                    gbl_app = obj as AcadApplication;
+                    try
+                    {
+                        var point1 = gbl_app.ActiveDocument.Utility.GetPoint();
+                        var point2 = gbl_app.ActiveDocument.Utility.GetPoint();
+                        gbl_app.ActiveDocument.Utility.InitializeUserInput(1);
+
+                        gbl_app.ActiveDocument.Utility.GetCorner(point1);
+                        gbl_app.ActiveDocument.Utility.GetCorner(point2);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+            }
+            
+        }
+
+        
+
     }
 }

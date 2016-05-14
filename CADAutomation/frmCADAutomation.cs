@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using CADAutomation;
 using Autodesk.AutoCAD;
+using Autodesk.AutoCAD.Interop;
+using Autodesk.AutoCAD.Interop.Common;
 
 namespace CADAutomation
 {
@@ -45,7 +47,11 @@ namespace CADAutomation
                 PF.DrawText((_startX + (10 * i)) + 1.0, (_startY - 15.0), "Point " + (i + 1), 2.0, PF.gbl_pi / 2);
                 PF.gbl_doc.ActiveLayer = PF.SwitchLayer;
             }
-            PF.gbl_doc.Plot.DisplayPlotPreview(Autodesk.AutoCAD.Interop.Common.AcPreviewMode.acPartialPreview);
+
+            PF.gbl_doc.ActiveLayout.ConfigName = "DWF6 ePlot.pc3";
+
+            PF.gbl_doc.Plot.PlotToDevice();
+            //ap.DisplayPlotPreview(AcPreviewMode.acFullPreview);
         }
     }
 }

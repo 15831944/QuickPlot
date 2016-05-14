@@ -8,7 +8,7 @@ using Autodesk.AutoCAD.Interop;
 using Autodesk.AutoCAD.Interop.Common;
 using System.Runtime.InteropServices;
 
-namespace CADAutomation
+namespace QuickPrint.AutoCAD
 {
     public static class PF
     {
@@ -61,8 +61,8 @@ namespace CADAutomation
                         gbl_modSpace = (AcadModelSpaceClass)gbl_doc.ModelSpace;
                         gbl_doc.Linetypes.Load("HIDDEN", "acad.lin");
                         gbl_doc.Linetypes.Load("CENTER", "acad.lin");
-                        
-                        
+
+
 
 
                         //Other Objects Layer
@@ -100,7 +100,7 @@ namespace CADAutomation
             //    if (gbl_app != null) Marshal.FinalReleaseComObject(gbl_app);
             //}
 
-            
+
         }
 
         public static void DrawLine(double StartX1,
@@ -301,7 +301,7 @@ namespace CADAutomation
             centerPoint[1] = StartingYPoint;
             centerPoint[2] = 0.0;
             circleObj = gbl_doc.ModelSpace.AddCircle(centerPoint, Radius);
-            
+
         }
 
         public static void DrawArc(double StartingXPoint,
