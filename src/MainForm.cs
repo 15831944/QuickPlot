@@ -4459,9 +4459,69 @@ namespace VisualWget
                     gbl_app = obj as AcadApplication;
                     try
                     {
-                        gbl_app.ActiveDocument.ActiveLayout.ConfigName = "DWF6 ePlot.pc3";
+                        //gbl_app.ActiveDocument.ActiveLayout.ConfigName = "DWF6 ePlot.pc3";
+                       // AcadPreferencesOutput ACADPref = gbl_app.ActiveDocument.Application.Preferences.Output;
+                        string newFile = @"C:\Users\CongNV\AppData\Roaming\Autodesk\AutoCAD 2007\R17.0\enu\Plot Styles\monochrome.ctb";
+                        //ACADPref.DefaultPlotStyleTable = newFile;
+                        
+                        
+
+                        //
+                        AcadPlotConfigurations PtConfigs;
+                        AcadPlotConfiguration PlotConfig;
+                        AcadPlot PtObj;
+                        var BackPlot = gbl_app.ActiveDocument.GetVariable("BACKGROUNDPLOT");
+
+                        //Create a new plot configuration with all needed parameters
+                        PtObj = gbl_app.ActiveDocument.Plot;
+                        PtConfigs = gbl_app.ActiveDocument.PlotConfigurations;
+
+                        //'Add a new plot configuration
+                        PtConfigs.Add("PDF", false);
+
+                        //'The plot config you created become active
+                        PlotConfig = PtConfigs.Item("PDF");
+
+                        //Use this method to set the scale
+                        PlotConfig.StandardScale = AcPlotScale.acScaleToFit;
+
+                        //Updates the plot
+                        PlotConfig.RefreshPlotDeviceInfo();
+                        //'Here you specify the pc3 file you want to use
+
+                        PlotConfig.ConfigName = "DWG To PDF.pc3";
+                        //'You can select the plot style table here
+                        PlotConfig.StyleSheet = newFile;
+
+                        //Specifies whether or not to plot using the plot styles
+                        PlotConfig.PlotWithPlotStyles = true;
+                        //If you are going to create pdf files in a batch mode,
+                        //'I would recommend to turn off the BACKGROUNDPLOT system variable,
+                        //'so autocad will not continue to do anything until finishes
+                        //'the pdf creation
+                        gbl_app.ActiveDocument.SetVariable("BACKGROUNDPLOT", 0);
+
+                        //'Updates the plot
+                        PlotConfig.RefreshPlotDeviceInfo();
+
                         gbl_app.ActiveDocument.Plot.DisplayPlotPreview(AcPreviewMode.acPartialPreview);
 
+                        //'Now you can use the PlotTofile method
+                        if (PtObj.PlotToFile(gbl_app.ActiveDocument.Name.Replace("dwg", "pdf"), PlotConfig.ConfigName))
+                        {
+                            MessageBox.Show("PDF was created!");
+                        }
+                        else
+                            MessageBox.Show("PDF creation unsuccessful!");
+                        //'If you wish you can delete th plot configuration you created
+                        //'programmatically, and set the 'BACKGROUNDPLOT' system variable
+                        //'to its original status.
+
+                        PtConfigs.Item("PDF").Delete();
+                        PlotConfig = null;
+                        gbl_app.ActiveDocument.SetVariable("BACKGROUNDPLOT", BackPlot);
+
+                        gbl_app.ActiveDocument.Plot.DisplayPlotPreview(AcPreviewMode.acPartialPreview);
                     }
                     catch (Exception ex)
                     {
