@@ -339,5 +339,52 @@ namespace QuickPrint.AutoCAD
             gbl_doc.ActiveLayer = SwitchLayer;
         }
         #endregion
+
+        #region Enesy
+        /// <summary>
+        /// Hàm này sẽ được gọi trước khi thực hiện các tác vụ khác
+        /// </summary>
+        public static void GetAcadApp()
+        {
+            try
+            {
+                object obj = Marshal.GetActiveObject("AutoCAD.Application.17");
+                if (obj != null)
+                {
+                    gbl_app = obj as AcadApplication;
+                }
+                else
+                {
+                    MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+            }
+        }
+
+        public static void CheckLayerExisting(string layerName)
+        {
+            GetAcadApp();
+            string message = "";
+            foreach (AcadLayer layer in gbl_app.ActiveDocument.Layers)
+            {
+                if (layer.Name == layerName)
+                {
+                    message = "Layer: " + layerName + " is exist!";
+                    break;
+                }
+                else
+                {
+                    message = "Layer: " + layerName + " is not exist!";
+                    break;
+                }
+                
+            }
+            MessageBox.Show(message);
+        }
+        #endregion
+
     }
 }

@@ -73,7 +73,9 @@
     </Compile>
     <Compile Include="CTB\Crc\CRC32.cs" />
     <Compile Include="CTB\Crc\CrcCalculatorStream.cs" />
+    <Compile Include="CTB\CTBRec.cs" />
     <Compile Include="CTB\notes.cs" />
+    <Compile Include="CTB\PublicFunctions.cs" />
     <Compile Include="CTB\Zlib\Adler.cs" />
     <Compile Include="CTB\Zlib\BlockState.cs" />
     <Compile Include="CTB\Zlib\CompressionLevel.cs" />
@@ -261,6 +263,7 @@
     <None Include="Resources\MainToolbar_DefaultDownloadOptions.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\refresh16.png" />
     <Content Include="Resources\splash.png" />
   </ItemGroup>
   <ItemGroup>

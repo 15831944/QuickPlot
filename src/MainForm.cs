@@ -21,6 +21,10 @@ using Autodesk.AutoCAD;
 using Autodesk.AutoCAD.Interop;
 using Autodesk.AutoCAD.Interop.Common;
 using QuickPrint.AutoCAD;
+using Ionic.Zlib;
+using QuickPrint.CTB;
+using System.Text.RegularExpressions;
+using System.Globalization;
 #endregion
 
 namespace VisualWget
@@ -696,7 +700,8 @@ namespace VisualWget
                     QuickPrint.Properties.Resources.MainToolbar_DefaultDownloadOptions,
                     QuickPrint.Properties.Resources.MainToolbar_Preferences,
                     QuickPrint.Properties.Resources.MainToolbar_New_Multiple,
-                    QuickPrint.Properties.Resources.MainToolbar_Speed_Limit
+                    QuickPrint.Properties.Resources.MainToolbar_Speed_Limit,
+                    QuickPrint.Properties.Resources.refresh16,
                 });
 
             jobsListViewImageList = new ImageList();
@@ -4444,6 +4449,8 @@ namespace VisualWget
         public static AcadDocument gbl_doc;
         private void menuItem2_Click(object sender, EventArgs e)
         {
+            this.TopMost = false;
+            this.WindowState = FormWindowState.Minimized;
             try
             {
                 object obj = Marshal.GetActiveObject("AutoCAD.Application.17");
@@ -4561,11 +4568,7 @@ namespace VisualWget
                     try
                     {
                         var point1 = gbl_app.ActiveDocument.Utility.GetPoint();
-                        var point2 = gbl_app.ActiveDocument.Utility.GetPoint();
-                        gbl_app.ActiveDocument.Utility.InitializeUserInput(1);
-
                         gbl_app.ActiveDocument.Utility.GetCorner(point1);
-                        gbl_app.ActiveDocument.Utility.GetCorner(point2);
 
                     }
                     catch (Exception ex)
@@ -4585,7 +4588,601 @@ namespace VisualWget
             
         }
 
+        private void menuItem9_Click(object sender, EventArgs e)
+        {
+            PF.CheckLayerExisting("0");
+        }
+
+        #region CTB
         
+        private Dictionary<int, string> pensdict = new Dictionary<int, string>();
+        private string[] LineTypes = new string[32]
+    {
+      "Solid",
+      "Dashed",
+      "Dotted",
+      "Dash Dot",
+      "Short Dash",
+      "Medium Dash",
+      "Long Dash",
+      "Short Dah X2",
+      "Medium Dash X2",
+      "Long Dash X2",
+      "Medium Long Dash",
+      "Medium Dash Short Dash Short Dash",
+      "Long Dash Short Dash",
+      "Long Dash Dot Dot",
+      "Long Dash Dot Dot",
+      "Medium Dash Dot Short Dash Dot",
+      "Sparse Dot",
+      "ISO Dash",
+      "ISO Dash Space",
+      "ISO Long Dash Dot",
+      "ISO Long Dash Double Dot",
+      "ISO Long Dash Triple Dot",
+      "ISO Dot",
+      "ISO Long Dash Short Dash",
+      "ISO Long Dash Double Short Dash",
+      "ISO Dash Dot",
+      "ISO Double Dash Dot",
+      "ISO Dash Double Dot",
+      "ISO Double Dash Double Dot",
+      "ISO Dash Triple Dot",
+      "ISO Double Dash Triple Dot",
+      "(Object)"
+    };
+        private string[] FillStyle = new string[10]
+    {
+      "Solid",
+      "Checkerboard",
+      "Crosshatch",
+      "Diamonds",
+      "Hor. bars",
+      "Slant left",
+      "Slant right",
+      "Square dots",
+      "Vert. bars",
+      "(Object)"
+    };
+        private string[] EndStyle = new string[5]
+    {
+      "Butt",
+      "Square",
+      "Round",
+      "Diamond",
+      "(Object)"
+    };
+        private string[] JoinStyle = new string[6]
+    {
+      "Miter",
+      "Bevel",
+      "Round",
+      "Diamond",
+      "Dummy",
+      "(Object)"
+    };
+
+        private void menuItem11_Click(object sender, EventArgs e)
+        {
+            if (this.openFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+
+            this.logTextBox.Clear();
+            this.Decompress(this.openFileDialog1.FileName);
+        }
+        private void Decompress(string input)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            List<string> stringList1 = new List<string>();
+            List<string> stringList2 = new List<string>();
+            List<CtbRec> ctbRecList = new List<CtbRec>();
+            using (FileStream fileStream = new FileStream(input, FileMode.Open, FileAccess.Read))
+            {
+                using (ZlibStream zlibStream = new ZlibStream((Stream)fileStream, CompressionMode.Decompress, false))
+                {
+                    fileStream.Seek(60L, SeekOrigin.Begin);
+                    int num;
+                    do
+                    {
+                        byte[] numArray = new byte[4096];
+                        num = zlibStream.Read(numArray, 0, 4096);
+                        stringBuilder.Append(Encoding.Default.GetString(numArray));
+                    }
+                    while (num > 0);
+                }
+            }
+            string string1 = stringBuilder.ToString();
+            if (!string1.StartsWith("description="))
+            {
+                int num1 = (int)MessageBox.Show("Not a valid ctb/stb file");
+            }
+            else
+            {
+                this.logTextBox.Text = string1;
+                //string[] strArray1 = string1.Split(Environment.NewLine.ToCharArray());
+                //if (strArray1.Length < 50)
+                //{
+                //    int num2 = (int)MessageBox.Show("Not a valid ctb/stb file");
+                //}
+                //else
+                //{
+                //    string str1 = "";
+                //    string str2 = "";
+                //    int num3 = 0;
+                //    for (int index = 0; index < strArray1.Length; ++index)
+                //    {
+                //        string TheLine = strArray1[index];
+                //        if (TheLine.StartsWith("custom_lineweight_display_units"))
+                //        {
+                //            string str3 = this.RightSide(strArray1[index]);
+                //            if (str3 == "0")
+                //                str3 = "mm";
+                //            if (str3 == "1")
+                //                str3 = "inch";
+                //            //this.toolStripStatusLabel1.Text = "Units: " + str3;
+                //        }
+                //        if (TheLine.StartsWith("scale_factor"))
+                //            str2 = this.RightSide(TheLine).Split('(')[0].Trim();
+                //        if (TheLine.StartsWith("apply_factor"))
+                //        {
+                //            if (this.RightSide(TheLine).Contains("TRUE"))
+                //                this.toolStripStatusLabel2.Text = "LW Scale by: " + str2;
+                //            else
+                //                this.toolStripStatusLabel2.Text = "";
+                //        }
+                //        if (TheLine.StartsWith("custom_lineweight_table{"))
+                //            break;
+                //    }
+                //    str1 = "";
+                //    num3 = 0;
+                //    int index1 = 0;
+                //    while (index1 < strArray1.Length && !strArray1[index1].StartsWith("custom_lineweight_table{"))
+                //        ++index1;
+                //    for (int index2 = index1 + 1; index2 < strArray1.Length - 1 && !strArray1[index2].Equals("}"); ++index2)
+                //        stringList1.Add(this.RightSide(strArray1[index2]));
+                //    int startIndex = string1.IndexOf("plot_style{") + 11;
+                //    int num4 = string1.IndexOf("}\n}") + 1;
+                //    string[] strArray2 = string1.Substring(startIndex, num4 - startIndex).Split(new char[2] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
+                //    List<List<string>> stringListList = new List<List<string>>();
+                //    string[] strArray3 = new string[strArray2.Length / 2 - 1];
+                //    string[] strArray4 = strArray2[1].Trim(' ', '"').Split(new char[1] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                //    for (int index2 = 0; index2 < strArray4.Length; ++index2)
+                //        this.dt.Columns.Add("col" + index2.ToString(), UppercaseFirst(this.LeftSide(strArray4[index2]).Trim()));
+                //    int index3 = 1;
+                //    while (index3 < strArray2.Length)
+                //    {
+                //        int index2 = -1;
+                //        int argb = 0;
+                //        string[] items = strArray2[index3].Trim(' ', '"').Split(new char[1] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                //        int index4;
+                //        for (int index5 = 0; index5 < items.Length; ++index5)
+                //        {
+                //            switch (this.LeftSide(items[index5]))
+                //            {
+                //                case "name":
+                //                    string str3 = this.RightSide(items[index5]);
+                //                    string str4 = "000";
+                //                    if (str3.StartsWith("Color_"))
+                //                    {
+                //                        str4 = Convert.ToInt32(str3.Split('_')[1]).ToString("D3");
+                //                        str3 = str3.Split('_')[0];
+                //                    }
+                //                    items[index5] = str3 + "_" + str4;
+                //                    break;
+                //                case "localized_name":
+                //                    items[index5] = this.RightSide(items[index5]);
+                //                    break;
+                //                case "color":
+                //                    if (this.IsNumber(this.RightSide(items[index5])))
+                //                    {
+                //                        int int32 = Convert.ToInt32(this.RightSide(items[index5]));
+                //                        if (int32 == -1006632961 || int32 == -1)
+                //                        {
+                //                            items[index5] = "(Object)";
+                //                        }
+                //                        else
+                //                        {
+                //                            string s = int32.ToString("X8").Substring(2);
+                //                            if (s.Equals("FFFFFF"))
+                //                            {
+                //                                items[index5] = "(Object)";
+                //                            }
+                //                            else
+                //                            {
+                //                                int key = int.Parse(s, NumberStyles.HexNumber);
+                //                                items[index5] = !this.pensdict.ContainsKey(key) ? "TrueColor" : this.pensdict[key];
+                //                            }
+                //                        }
+                //                        break;
+                //                    }
+                //                    break;
+                //                case "mode_color":
+                //                    if (this.IsNumber(this.RightSide(items[index5])))
+                //                    {
+                //                        int int32 = Convert.ToInt32(this.RightSide(items[index5]));
+                //                        if (int32 != 0)
+                //                        {
+                //                            if (items[index5 - 1].Equals("(Object)"))
+                //                            {
+                //                                items[index5] = "(Object)";
+                //                            }
+                //                            else
+                //                            {
+                //                                items[index5] = this.IntToColor(int32);
+                //                                index2 = index5;
+                //                                argb = int32;
+                //                            }
+                //                        }
+                //                        else
+                //                            items[index5] = "(Object)";
+                //                        break;
+                //                    }
+                //                    break;
+                //                case "color_policy":
+                //                    index4 = 0;
+                //                    if (this.IsNumber(this.RightSide(items[index5])))
+                //                    {
+                //                        index4 = Convert.ToInt32(this.RightSide(items[index5]));
+                //                        switch (index4)
+                //                        {
+                //                            case 0:
+                //                                items[index5] = "none";
+                //                                break;
+                //                            case 1:
+                //                                items[index5] = "dith";
+                //                                break;
+                //                            case 2:
+                //                                items[index5] = "gray";
+                //                                break;
+                //                            case 3:
+                //                                items[index5] = "dith, gray";
+                //                                break;
+                //                            case 4:
+                //                                items[index5] = "none";
+                //                                break;
+                //                            case 5:
+                //                                items[index5] = "dith";
+                //                                break;
+                //                        }
+                //                        break;
+                //                    }
+                //                    break;
+                //                case "physical_pen_number":
+                //                    index4 = 0;
+                //                    if (this.IsNumber(this.RightSide(items[index5])))
+                //                    {
+                //                        index4 = Convert.ToInt32(this.RightSide(items[index5]));
+                //                        items[index5] = index4 != 0 ? index4.ToString() : "Auto";
+                //                        break;
+                //                    }
+                //                    break;
+                //                case "virtual_pen_number":
+                //                    index4 = 0;
+                //                    if (this.IsNumber(this.RightSide(items[index5])))
+                //                    {
+                //                        index4 = Convert.ToInt32(this.RightSide(items[index5]));
+                //                        items[index5] = index4 != 0 ? index4.ToString() : "Auto";
+                //                        break;
+                //                    }
+                //                    break;
+                //                case "linetype":
+                //                    index4 = 0;
+                //                    if (this.IsNumber(this.RightSide(items[index5])))
+                //                    {
+                //                        index4 = Convert.ToInt32(this.RightSide(items[index5]));
+                //                        items[index5] = this.LineTypes[index4];
+                //                        break;
+                //                    }
+                //                    items[index5] = "unknown";
+                //                    break;
+                //                case "lineweight":
+                //                    index4 = 0;
+                //                    if (this.IsNumber(this.RightSide(items[index5])))
+                //                    {
+                //                        index4 = Convert.ToInt32(this.RightSide(items[index5]));
+                //                        items[index5] = index4 != 0 ? stringList1[index4 - 1] : "(Object)";
+                //                        break;
+                //                    }
+                //                    break;
+                //                case "fill_style":
+                //                    index4 = 0;
+                //                    if (this.IsNumber(this.RightSide(items[index5])))
+                //                    {
+                //                        index4 = Convert.ToInt32(this.RightSide(items[index5]));
+                //                        items[index5] = this.FillStyle[index4 - 64];
+                //                        break;
+                //                    }
+                //                    break;
+                //                case "end_style":
+                //                    index4 = 0;
+                //                    if (this.IsNumber(this.RightSide(items[index5])))
+                //                    {
+                //                        index4 = Convert.ToInt32(this.RightSide(items[index5]));
+                //                        items[index5] = this.EndStyle[index4];
+                //                        break;
+                //                    }
+                //                    break;
+                //                case "join_style":
+                //                    index4 = 0;
+                //                    if (this.IsNumber(this.RightSide(items[index5])))
+                //                    {
+                //                        index4 = Convert.ToInt32(this.RightSide(items[index5]));
+                //                        items[index5] = this.JoinStyle[index4];
+                //                        break;
+                //                    }
+                //                    break;
+                //                default:
+                //                    items[index5] = this.RightSide(items[index5]);
+                //                    break;
+                //            }
+                //        }
+                //        ListViewItem listViewItem = new ListViewItem(items);
+                //        if (index2 >= 0)
+                //        {
+                //            string text = listViewItem.SubItems[index2].Text;
+                //            listViewItem.SubItems[index2].BackColor = Color.FromArgb(argb);
+                //        }
+                //        this.dt.Rows.Add((object[])items);
+                //        index3 += 2;
+                //    }
+                //    int index6 = 0;
+                //    while (index6 < this.dt.Columns.Count - 1 && !this.dt.Columns[index6].HeaderText.ToLower().Equals("mode_color"))
+                //        ++index6;
+                //    for (int index2 = 0; index2 < this.dt.Rows.Count; ++index2)
+                //    {
+                //        if (this.dt[index6, index2].Value != null)
+                //        {
+                //            string string2 = this.dt[index6, index2].Value.ToString();
+                //            if (string2.Contains(","))
+                //            {
+                //                int int32_1 = Convert.ToInt32(string2.Split(',')[0]);
+                //                int int32_2 = Convert.ToInt32(string2.Split(',')[1]);
+                //                int int32_3 = Convert.ToInt32(string2.Split(',')[2]);
+                //                this.dt.Rows[index2].Cells[index6].Style.BackColor = Color.FromArgb(int32_1, int32_2, int32_3);
+                //            }
+                //        }
+                //    }
+                //    if (this.radioButton1.Checked)
+                //        this.dt.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
+                //    else if (this.radioButton2.Checked)
+                //        this.dt.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                //    this.dt.ColumnHeadersDefaultCellStyle.Font = new Font(this.dt.Font, FontStyle.Bold);
+                //}
+            }
+        }
+        private static string ITBS(string thepath)
+        {
+            return !thepath.EndsWith("\\") ? thepath + "\\" : thepath;
+        }
+
+        private static string UppercaseFirst(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return string.Empty;
+            return ((int)char.ToUpper(s[0])).ToString() + s.Substring(1);
+        }
+
+        public bool IsNumber(string strNumber)
+        {
+            Regex regex1 = new Regex("[^0-9.-]");
+            Regex regex2 = new Regex("[0-9]*[.][0-9]*[.][0-9]*");
+            Regex regex3 = new Regex("[0-9]*[-][0-9]*[-][0-9]*");
+            Regex regex4 = new Regex("(" + "^([-]|[.]|[-.]|[0-9])[0-9]*[.]*[0-9]+$" + ")|(" + "^([-]|[0-9])[0-9]*$" + ")");
+            return !regex1.IsMatch(strNumber) && !regex2.IsMatch(strNumber) && !regex3.IsMatch(strNumber) && regex4.IsMatch(strNumber);
+        }
+
+        private string LeftSide(string TheLine)
+        {
+            string str = "";
+            if (TheLine.Contains("="))
+                str = TheLine.Split('=')[0].Trim(' ');
+            return str;
+        }
+
+        private string RightSide(string TheLine)
+        {
+            if (!TheLine.Contains("="))
+                return "";
+            return TheLine.Split('=')[1].Trim('"');
+        }
+
+        private string IntToColor(int colornumber)
+        {
+            long num1 = ((long)colornumber & 4278190080L) >> 24;
+            long num2 = (long)((colornumber & 16711680) >> 16);
+            long num3 = (long)((colornumber & 65280) >> 8);
+            long num4 = (long)(colornumber & (int)byte.MaxValue);
+            string str;
+            if (colornumber == -1 || colornumber == 16777215)
+                str = "(Object)";
+            else
+                str = num2.ToString() + "," + num3.ToString() + "," + num4.ToString();
+            return str;
+        }
+        public static void CopyStream(Stream input, Stream output)
+        {
+            byte[] buffer = new byte[2000];
+            int count;
+            while ((count = input.Read(buffer, 0, 2000)) > 0)
+                output.Write(buffer, 0, count);
+            output.Flush();
+        }
+
+        public static int GetCompressedSize(string inFile, bool IsFile)
+        {
+            FileStream fileStream = new FileStream(inFile, FileMode.Open, FileAccess.Read);
+            byte[] buffer;
+            try
+            {
+                int length = (int)fileStream.Length;
+                buffer = new byte[length];
+                int offset = 0;
+                int num;
+                while ((num = fileStream.Read(buffer, offset, length - offset)) > 0)
+                    offset += num;
+            }
+            finally
+            {
+                fileStream.Close();
+            }
+            byte[] array;
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                using (ZlibStream zlibStream = new ZlibStream((Stream)memoryStream, CompressionMode.Compress))
+                {
+                    using (Stream input = (Stream)new MemoryStream(buffer))
+                    {
+                        CopyStream(input, (Stream)zlibStream);
+                        zlibStream.Close();
+                        array = memoryStream.ToArray();
+                    }
+                }
+            }
+            return array.Length;
+        }
+
+        public static int GetCompressedSize(string ctbcontent)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(ctbcontent);
+            MemoryStream memoryStream1 = new MemoryStream(bytes);
+            MemoryStream memoryStream2 = new MemoryStream(bytes);
+            byte[] buffer;
+            try
+            {
+                int length = (int)memoryStream2.Length;
+                buffer = new byte[length];
+                int offset = 0;
+                int num;
+                while ((num = memoryStream2.Read(buffer, offset, length - offset)) > 0)
+                    offset += num;
+            }
+            finally
+            {
+                memoryStream2.Close();
+            }
+            byte[] array;
+            using (MemoryStream memoryStream3 = new MemoryStream())
+            {
+                using (ZlibStream zlibStream = new ZlibStream((Stream)memoryStream3, CompressionMode.Compress))
+                {
+                    using (Stream input = (Stream)new MemoryStream(buffer))
+                    {
+                        CopyStream(input, (Stream)zlibStream);
+                        zlibStream.Close();
+                        array = memoryStream3.ToArray();
+                    }
+                }
+            }
+            return array.Length;
+        }
+
+        public static void MakeHeader(Stream input, Stream output)
+        {
+            byte[] buffer = new byte[60];
+            int count;
+            while ((count = input.Read(buffer, 0, 60)) > 0)
+                output.Write(buffer, 0, count);
+            output.Flush();
+        }
+
+        public void compressFile(string inFile, string outFile)
+        {
+            byte[] buffer = new byte[60];
+            string str1 = "PIAFILEVERSION_2.0,CTBVER1,compress\r\npmzlibcodec";
+            int length = str1.Length;
+            for (int index = 0; index < length; ++index)
+                buffer[index] = Convert.ToByte(str1[index]);
+            for (int index = length; index < 55; ++index)
+                buffer[index] = byte.MaxValue;
+            buffer[55] = (byte)0;
+            int compressedSize = GetCompressedSize(inFile, true);
+            string str2 = string.Format("{0:X8}", (object)compressedSize);
+            string str3 = str2.Substring(0, 2);
+            string str4 = str2.Substring(2, 2);
+            string str5 = str2.Substring(4, 2);
+            string str6 = str2.Substring(6, 2);
+            buffer[56] = Convert.ToByte(str6, 16);
+            buffer[57] = Convert.ToByte(str5, 16);
+            buffer[58] = Convert.ToByte(str4, 16);
+            buffer[59] = Convert.ToByte(str3, 16);
+            FileStream fileStream1 = new FileStream(outFile, FileMode.Create);
+            ZlibStream zlibStream = new ZlibStream((Stream)fileStream1, CompressionMode.Compress);
+            FileStream fileStream2 = new FileStream(inFile, FileMode.Open);
+            Stream input = (Stream)new MemoryStream(buffer);
+            try
+            {
+                MakeHeader(input, (Stream)fileStream1);
+                CopyStream((Stream)fileStream2, (Stream)zlibStream);
+            }
+            finally
+            {
+                //this.label1.Text = compressedSize.ToString();
+                zlibStream.Close();
+                fileStream1.Close();
+                fileStream2.Close();
+            }
+        }
+
+        public void compressFile(string ctbcontent, bool IsContent, string outFile)
+        {
+            byte[] buffer = new byte[60];
+            string str1 = "PIAFILEVERSION_2.0,CTBVER1,compress\r\npmzlibcodec";
+            int length = str1.Length;
+            for (int index = 0; index < length; ++index)
+                buffer[index] = Convert.ToByte(str1[index]);
+            for (int index = length; index < 55; ++index)
+                buffer[index] = byte.MaxValue;
+            buffer[55] = (byte)0;
+            int compressedSize = GetCompressedSize(ctbcontent);
+            string str2 = string.Format("{0:X8}", (object)compressedSize);
+            string str3 = str2.Substring(0, 2);
+            string str4 = str2.Substring(2, 2);
+            string str5 = str2.Substring(4, 2);
+            string str6 = str2.Substring(6, 2);
+            buffer[56] = Convert.ToByte(str6, 16);
+            buffer[57] = Convert.ToByte(str5, 16);
+            buffer[58] = Convert.ToByte(str4, 16);
+            buffer[59] = Convert.ToByte(str3, 16);
+            FileStream fileStream = new FileStream(outFile, FileMode.Create);
+            ZlibStream zlibStream = new ZlibStream((Stream)fileStream, CompressionMode.Compress);
+            MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(ctbcontent));
+            Stream input = (Stream)new MemoryStream(buffer);
+            try
+            {
+                MakeHeader(input, (Stream)fileStream);
+                CopyStream((Stream)memoryStream, (Stream)zlibStream);
+            }
+            finally
+            {
+                //this.label1.Text = compressedSize.ToString();
+                zlibStream.Close();
+                fileStream.Close();
+                memoryStream.Close();
+            }
+        }
+        #endregion
+
+        private void menuItem12_Click(object sender, EventArgs e)
+        {
+            if (this.logTextBox.Text.Length < 0) return;
+            this.saveFileDialog1.Filter = "CTB Files|*.ctb|STB Files|*.stb";
+            this.saveFileDialog1.FileName = Path.GetDirectoryName(this.openFileDialog1.FileName) + "\\_" + Path.GetFileName(this.openFileDialog1.FileName);
+            this.saveFileDialog1.DefaultExt = "." + Path.GetExtension(this.openFileDialog1.FileName);
+            switch (this.saveFileDialog1.DefaultExt)
+            {
+                case ".ctb":
+                    this.saveFileDialog1.FilterIndex = 1;
+                    break;
+                case ".stb":
+                    this.saveFileDialog1.FilterIndex = 2;
+                    break;
+            }
+            if (this.saveFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+            if (this.saveFileDialog1.FileName.Equals(this.openFileDialog1.FileName))
+                this.saveFileDialog1.FileName = Path.GetDirectoryName(this.saveFileDialog1.FileName) + "\\~" + Path.GetFileName(this.saveFileDialog1.FileName);
+            this.compressFile(this.logTextBox.Text, true, this.saveFileDialog1.FileName);
+        }
 
     }
 }

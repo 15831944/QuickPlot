@@ -16,7 +16,7 @@ using System.Threading;
 
 namespace QuickPrint.AutoCAD
 {
-    enum SheetStatus
+    public enum SheetStatus
     {
         Error = 0,
         Ready = 1,
@@ -34,5 +34,9 @@ namespace QuickPrint.AutoCAD
         public string Path { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public SheetStatus Status { get; set; }
+
+        public void GetPrintPreview() { }
+        public void OpenInExplorer() { }
     }
 }
