@@ -661,31 +661,31 @@ namespace VisualWget
             sortCol = 1;
             sortAsc = true;
 
-            TcpListener server = new TcpListener(IPAddress.Parse("127.0.0.1"), 0);
+            //TcpListener server = new TcpListener(IPAddress.Parse("127.0.0.1"), 0);
 
-            server.Start();
-            Util.ListeningPort = ((IPEndPoint)server.LocalEndpoint).Port;
-            listenServer = new BackgroundWorker();
-            listenServer.DoWork += new DoWorkEventHandler(listenServer_DoWork);
-            listenServer.WorkerReportsProgress = true;
-            listenServer.ProgressChanged += new ProgressChangedEventHandler(listenServer_ProgressChanged);
-            listenServer.RunWorkerAsync(server);
+            //server.Start();
+            //Util.ListeningPort = ((IPEndPoint)server.LocalEndpoint).Port;
+            //listenServer = new BackgroundWorker();
+            //listenServer.DoWork += new DoWorkEventHandler(listenServer_DoWork);
+            //listenServer.WorkerReportsProgress = true;
+            //listenServer.ProgressChanged += new ProgressChangedEventHandler(listenServer_ProgressChanged);
+            //listenServer.RunWorkerAsync(server);
 
-            autoShutdownAction = AutoShutdownAction.None;
-            downloadsCompleted = true;
-            maxRunningJobs = decimal.Parse(Util.GetSetting("MaxRunningJobs"));
-            showBalloonTip = bool.Parse(Util.GetSetting("ShowBalloonTip"));
-            retry = bool.Parse(Util.GetSetting("Retry"));
-            retryAttempts = decimal.Parse(Util.GetSetting("RetryAttempts"));
-            timeBetweenRetryAttempts = Util.GetTimeBetweenRetryAttempts();
-            selectedJobs = new List<Job>();
-            cx = 0;
-            cy = 0;
-            computeHashDone = true;
-            settingSaved = true;
-            logPos = 0;
-            selectedJob = null;
-            updateLog = true;
+            //autoShutdownAction = AutoShutdownAction.None;
+            //downloadsCompleted = true;
+            //maxRunningJobs = decimal.Parse(Util.GetSetting("MaxRunningJobs"));
+            //showBalloonTip = bool.Parse(Util.GetSetting("ShowBalloonTip"));
+            //retry = bool.Parse(Util.GetSetting("Retry"));
+            //retryAttempts = decimal.Parse(Util.GetSetting("RetryAttempts"));
+            //timeBetweenRetryAttempts = Util.GetTimeBetweenRetryAttempts();
+            //selectedJobs = new List<Job>();
+            //cx = 0;
+            //cy = 0;
+            //computeHashDone = true;
+            //settingSaved = true;
+            //logPos = 0;
+            //selectedJob = null;
+            //updateLog = true;
 
             toolBar1ImageList = new ImageList();
             toolBar1ImageList.ColorDepth = ColorDepth.Depth32Bit;
@@ -4462,7 +4462,7 @@ namespace VisualWget
                     {
                         //gbl_app.ActiveDocument.ActiveLayout.ConfigName = "DWF6 ePlot.pc3";
                        // AcadPreferencesOutput ACADPref = gbl_app.ActiveDocument.Application.Preferences.Output;
-                        string newFile = @"C:\Users\CongNV\AppData\Roaming\Autodesk\AutoCAD 2007\R17.0\enu\Plot Styles\monochrome.ctb";
+                        string newFile = "monochrome.ctb";
                         //ACADPref.DefaultPlotStyleTable = newFile;
                         
                         //
@@ -4484,17 +4484,19 @@ namespace VisualWget
                         //Use this method to set the scale
                         PlotConfig.StandardScale = AcPlotScale.acScaleToFit;
 
-                        //Updates the plot
-                        PlotConfig.RefreshPlotDeviceInfo();
-                        //'Here you specify the pc3 file you want to use
 
                         PlotConfig.ConfigName = "DWG To PDF.pc3";
                         
-                        //'You can select the plot style table here
-                        PlotConfig.StyleSheet = newFile;
 
                         //Specifies whether or not to plot using the plot styles
                         PlotConfig.PlotWithPlotStyles = true;
+
+                        //'You can select the plot style table here
+                        PlotConfig.StyleSheet = newFile;
+
+                        //Updates the plot
+                        PlotConfig.RefreshPlotDeviceInfo();
+                        //'Here you specify the pc3 file you want to use
                         
                         //If you are going to create pdf files in a batch mode,
                         //'I would recommend to turn off the BACKGROUNDPLOT system variable,
@@ -4507,22 +4509,22 @@ namespace VisualWget
 
                         //gbl_app.ActiveDocument.Plot.DisplayPlotPreview(AcPreviewMode.acPartialPreview);
 
-                        //'Now you can use the PlotTofile method
-                        if (PtObj.PlotToFile(gbl_app.ActiveDocument.Name.Replace("dwg", "pdf"), PlotConfig.ConfigName))
-                        {
-                            MessageBox.Show("PDF was created!");
-                        }
-                        else
-                            MessageBox.Show("PDF creation unsuccessful!");
-                        //'If you wish you can delete th plot configuration you created
-                        //'programmatically, and set the 'BACKGROUNDPLOT' system variable
-                        //'to its original status.
+                        //////'Now you can use the PlotTofile method
+                        ////if (PtObj.PlotToFile(gbl_app.ActiveDocument.Name.Replace("dwg", "pdf"), PlotConfig.ConfigName))
+                        ////{
+                        ////    MessageBox.Show("PDF was created!");
+                        ////}
+                        ////else
+                        ////    MessageBox.Show("PDF creation unsuccessful!");
+                        //////'If you wish you can delete th plot configuration you created
+                        //////'programmatically, and set the 'BACKGROUNDPLOT' system variable
+                        //////'to its original status.
 
-                        PtConfigs.Item("PDF").Delete();
-                        PlotConfig = null;
-                        gbl_app.ActiveDocument.SetVariable("BACKGROUNDPLOT", BackPlot);
+                        ////PtConfigs.Item("PDF").Delete();
+                        ////PlotConfig = null;
+                        ////gbl_app.ActiveDocument.SetVariable("BACKGROUNDPLOT", BackPlot);
 
-                        //gbl_app.ActiveDocument.Plot.DisplayPlotPreview(AcPreviewMode.acPartialPreview);
+                        gbl_app.ActiveDocument.Plot.DisplayPlotPreview(AcPreviewMode.acPartialPreview);
                     }
                     catch (Exception ex)
                     {
@@ -4539,6 +4541,7 @@ namespace VisualWget
                 MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
             }
         }
+        
         private void menuItem5_Click(object sender, EventArgs e)
         {
             try
@@ -5256,6 +5259,40 @@ namespace VisualWget
             pdfConfig.SetCustomValue("Create_Bookmarks", false);
 
             pdfConfig.Write(Path.Combine(supportPath, "DWG To PDF - NoLayersOrBookmarks.pc3"));
+        }
+
+        private void menuItem14_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                object obj = Marshal.GetActiveObject("AutoCAD.Application.17");
+                if (obj != null)
+                {
+                    gbl_app = obj as AcadApplication;
+                    try
+                    {
+                        gbl_app.ActiveDocument.ActiveLayout.ConfigName = "DWF6 ePlot.pc3";
+                        // AcadPreferencesOutput ACADPref = gbl_app.ActiveDocument.Application.Preferences.Output;
+                        string newFile = @"C:\Users\CongNV\AppData\Roaming\Autodesk\AutoCAD 2007\R17.0\enu\Plot Styles\monochrome.ctb";
+                        //ACADPref.DefaultPlotStyleTable = newFile;
+
+                        gbl_app.ActiveDocument.Plot.PlotToDevice();
+                        gbl_app.ActiveDocument.Plot.DisplayPlotPreview(AcPreviewMode.acPartialPreview);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+            }
         }
 
     }
