@@ -145,13 +145,14 @@ namespace VisualWget
             this.menuItem9 = new System.Windows.Forms.MenuItem();
             this.menuItem10 = new System.Windows.Forms.MenuItem();
             this.menuItem11 = new System.Windows.Forms.MenuItem();
+            this.menuItem12 = new System.Windows.Forms.MenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.menuItem12 = new System.Windows.Forms.MenuItem();
+            this.menuItem13 = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -987,7 +988,8 @@ namespace VisualWget
             this.menuItem10.Index = 1;
             this.menuItem10.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem11,
-            this.menuItem12});
+            this.menuItem12,
+            this.menuItem13});
             this.menuItem10.Text = "CTB";
             // 
             // menuItem11
@@ -995,6 +997,12 @@ namespace VisualWget
             this.menuItem11.Index = 0;
             this.menuItem11.Text = "1. Read CTB";
             this.menuItem11.Click += new System.EventHandler(this.menuItem11_Click);
+            // 
+            // menuItem12
+            // 
+            this.menuItem12.Index = 1;
+            this.menuItem12.Text = "2. Recompress CTB";
+            this.menuItem12.Click += new System.EventHandler(this.menuItem12_Click);
             // 
             // panel1
             // 
@@ -1047,11 +1055,11 @@ namespace VisualWget
             this.logTextBox.Enter += new System.EventHandler(this.logTextBox_Enter);
             this.logTextBox.Leave += new System.EventHandler(this.logTextBox_Leave);
             // 
-            // menuItem12
+            // menuItem13
             // 
-            this.menuItem12.Index = 1;
-            this.menuItem12.Text = "2. Recompress CTB";
-            this.menuItem12.Click += new System.EventHandler(this.menuItem12_Click);
+            this.menuItem13.Index = 2;
+            this.menuItem13.Text = "PC3";
+            this.menuItem13.Click += new System.EventHandler(this.menuItem13_Click);
             // 
             // MainForm
             // 
@@ -1206,5 +1214,6 @@ namespace VisualWget
         private System.Windows.Forms.MenuItem menuItem10;
         private System.Windows.Forms.MenuItem menuItem11;
         private System.Windows.Forms.MenuItem menuItem12;
+        private System.Windows.Forms.MenuItem menuItem13;
     }
 }

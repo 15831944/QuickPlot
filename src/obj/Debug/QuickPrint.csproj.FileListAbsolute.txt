@@ -26,5 +26,8 @@ C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\VisualWget.SavePresetDialo
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\QuickPrint.Properties.Resources.resources
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\VisualWget.SelectFolderDialog.resources
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\QuickPrint.csproj.GenerateResource.Cache
-C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\QuickPrint.csprojResolveAssemblyReference.cache
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\QuickPrint.csproj.ResolveComReference.cache
+C:\Data\Projects\C#\QuickPlot\QuickPlot\src\bin\Debug\PiaNO.dll
+C:\Data\Projects\C#\QuickPlot\QuickPlot\src\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Data\Projects\C#\QuickPlot\QuickPlot\src\bin\Debug\PiaNO.pdb
+C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\QuickPrint.csprojResolveAssemblyReference.cache

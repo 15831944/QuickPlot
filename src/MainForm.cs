@@ -25,6 +25,7 @@ using Ionic.Zlib;
 using QuickPrint.CTB;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using PiaNO.Plot;
 #endregion
 
 namespace VisualWget
@@ -803,7 +804,7 @@ namespace VisualWget
             }
 
             //
-            this.TopMost = true;
+            //this.TopMost = true;
             AddTest();
         }
 
@@ -4449,7 +4450,7 @@ namespace VisualWget
         public static AcadDocument gbl_doc;
         private void menuItem2_Click(object sender, EventArgs e)
         {
-            this.TopMost = false;
+           // this.TopMost = false;
             this.WindowState = FormWindowState.Minimized;
             try
             {
@@ -4464,8 +4465,6 @@ namespace VisualWget
                         string newFile = @"C:\Users\CongNV\AppData\Roaming\Autodesk\AutoCAD 2007\R17.0\enu\Plot Styles\monochrome.ctb";
                         //ACADPref.DefaultPlotStyleTable = newFile;
                         
-                        
-
                         //
                         AcadPlotConfigurations PtConfigs;
                         AcadPlotConfiguration PlotConfig;
@@ -4490,11 +4489,13 @@ namespace VisualWget
                         //'Here you specify the pc3 file you want to use
 
                         PlotConfig.ConfigName = "DWG To PDF.pc3";
+                        
                         //'You can select the plot style table here
                         PlotConfig.StyleSheet = newFile;
 
                         //Specifies whether or not to plot using the plot styles
                         PlotConfig.PlotWithPlotStyles = true;
+                        
                         //If you are going to create pdf files in a batch mode,
                         //'I would recommend to turn off the BACKGROUNDPLOT system variable,
                         //'so autocad will not continue to do anything until finishes
@@ -4504,7 +4505,7 @@ namespace VisualWget
                         //'Updates the plot
                         PlotConfig.RefreshPlotDeviceInfo();
 
-                        gbl_app.ActiveDocument.Plot.DisplayPlotPreview(AcPreviewMode.acPartialPreview);
+                        //gbl_app.ActiveDocument.Plot.DisplayPlotPreview(AcPreviewMode.acPartialPreview);
 
                         //'Now you can use the PlotTofile method
                         if (PtObj.PlotToFile(gbl_app.ActiveDocument.Name.Replace("dwg", "pdf"), PlotConfig.ConfigName))
@@ -4521,7 +4522,7 @@ namespace VisualWget
                         PlotConfig = null;
                         gbl_app.ActiveDocument.SetVariable("BACKGROUNDPLOT", BackPlot);
 
-                        gbl_app.ActiveDocument.Plot.DisplayPlotPreview(AcPreviewMode.acPartialPreview);
+                        //gbl_app.ActiveDocument.Plot.DisplayPlotPreview(AcPreviewMode.acPartialPreview);
                     }
                     catch (Exception ex)
                     {
@@ -5242,6 +5243,19 @@ namespace VisualWget
             if (this.saveFileDialog1.FileName.Equals(this.openFileDialog1.FileName))
                 this.saveFileDialog1.FileName = Path.GetDirectoryName(this.saveFileDialog1.FileName) + "\\~" + Path.GetFileName(this.saveFileDialog1.FileName);
             this.compressFile(this.logTextBox.Text, true, this.saveFileDialog1.FileName);
+        }
+
+        private void menuItem13_Click(object sender, EventArgs e)
+        {
+            string supportPath = @"C:\Users\CongNV\AppData\Roaming\Autodesk\AutoCAD 2007\R17.0\enu\Plotters";
+            string configName = Path.Combine(supportPath, "DWG To PDF.pc3");
+            var pdfConfig = new PlotterConfiguration(configName);
+
+            pdfConfig.TruetypeAsText = true;
+            pdfConfig.SetCustomValue("Include_Layer", false);
+            pdfConfig.SetCustomValue("Create_Bookmarks", false);
+
+            pdfConfig.Write(Path.Combine(supportPath, "DWG To PDF - NoLayersOrBookmarks.pc3"));
         }
 
     }
