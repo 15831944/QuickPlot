@@ -143,6 +143,7 @@ namespace VisualWget
             this.menuItem7 = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
             this.menuItem9 = new System.Windows.Forms.MenuItem();
+            this.menuItem14 = new System.Windows.Forms.MenuItem();
             this.menuItem10 = new System.Windows.Forms.MenuItem();
             this.menuItem11 = new System.Windows.Forms.MenuItem();
             this.menuItem12 = new System.Windows.Forms.MenuItem();
@@ -153,7 +154,6 @@ namespace VisualWget
             this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.menuItem14 = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -985,6 +985,12 @@ namespace VisualWget
             this.menuItem9.Text = "Check Layer Exist";
             this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
             // 
+            // menuItem14
+            // 
+            this.menuItem14.Index = 6;
+            this.menuItem14.Text = "Plot To Device";
+            this.menuItem14.Click += new System.EventHandler(this.menuItem14_Click);
+            // 
             // menuItem10
             // 
             this.menuItem10.Index = 1;
@@ -1062,12 +1068,6 @@ namespace VisualWget
             this.logTextBox.WordWrap = false;
             this.logTextBox.Enter += new System.EventHandler(this.logTextBox_Enter);
             this.logTextBox.Leave += new System.EventHandler(this.logTextBox_Leave);
-            // 
-            // menuItem14
-            // 
-            this.menuItem14.Index = 6;
-            this.menuItem14.Text = "Plot To Device";
-            this.menuItem14.Click += new System.EventHandler(this.menuItem14_Click);
             // 
             // MainForm
             // 
