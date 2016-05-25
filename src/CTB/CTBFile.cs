@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace QuickPrint.CTB
@@ -47,6 +48,7 @@ namespace QuickPrint.CTB
             set { m_CustomLineweightDisplayUnits = value; }
         }
         public StringBuilder Content { get; set; }
+        public List<CTBColor> Colors { get; set; }
         #region Public Methods
         public void GenerateContent()
         {
@@ -69,6 +71,7 @@ namespace QuickPrint.CTB
         public CTBFile()
         {
             Content = new StringBuilder();
+            Colors = new List<CTBColor>();
 
         }
         public CTBFile(PrintType printType) : this()
