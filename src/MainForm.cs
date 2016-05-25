@@ -661,30 +661,30 @@ namespace VisualWget
             sortCol = 1;
             sortAsc = true;
 
-            //TcpListener server = new TcpListener(IPAddress.Parse("127.0.0.1"), 0);
+            TcpListener server = new TcpListener(IPAddress.Parse("127.0.0.1"), 0);
 
-            //server.Start();
-            //Util.ListeningPort = ((IPEndPoint)server.LocalEndpoint).Port;
-            //listenServer = new BackgroundWorker();
-            //listenServer.DoWork += new DoWorkEventHandler(listenServer_DoWork);
-            //listenServer.WorkerReportsProgress = true;
-            //listenServer.ProgressChanged += new ProgressChangedEventHandler(listenServer_ProgressChanged);
-            //listenServer.RunWorkerAsync(server);
+            server.Start();
+            Util.ListeningPort = ((IPEndPoint)server.LocalEndpoint).Port;
+            listenServer = new BackgroundWorker();
+            listenServer.DoWork += new DoWorkEventHandler(listenServer_DoWork);
+            listenServer.WorkerReportsProgress = true;
+            listenServer.ProgressChanged += new ProgressChangedEventHandler(listenServer_ProgressChanged);
+            listenServer.RunWorkerAsync(server);
 
-            //autoShutdownAction = AutoShutdownAction.None;
-            //downloadsCompleted = true;
-            //maxRunningJobs = decimal.Parse(Util.GetSetting("MaxRunningJobs"));
-            //showBalloonTip = bool.Parse(Util.GetSetting("ShowBalloonTip"));
-            //retry = bool.Parse(Util.GetSetting("Retry"));
-            //retryAttempts = decimal.Parse(Util.GetSetting("RetryAttempts"));
-            //timeBetweenRetryAttempts = Util.GetTimeBetweenRetryAttempts();
-            //selectedJobs = new List<Job>();
-            //cx = 0;
-            //cy = 0;
-            //computeHashDone = true;
-            //settingSaved = true;
-            //logPos = 0;
-            //selectedJob = null;
+            autoShutdownAction = AutoShutdownAction.None;
+            downloadsCompleted = true;
+            maxRunningJobs = decimal.Parse(Util.GetSetting("MaxRunningJobs"));
+            showBalloonTip = bool.Parse(Util.GetSetting("ShowBalloonTip"));
+            retry = bool.Parse(Util.GetSetting("Retry"));
+            retryAttempts = decimal.Parse(Util.GetSetting("RetryAttempts"));
+            timeBetweenRetryAttempts = Util.GetTimeBetweenRetryAttempts();
+            selectedJobs = new List<Job>();
+            cx = 0;
+            cy = 0;
+            computeHashDone = true;
+            settingSaved = true;
+            logPos = 0;
+            selectedJob = null;
             //updateLog = true;
 
             toolBar1ImageList = new ImageList();

@@ -18,6 +18,9 @@
 //  - EXPORT CONTENTS
 //  - ADDING SHEET ORDER (BY DTEXT)
 //  - MAY PACK FILES IN SHEETSET, CONSITS XREF FILES (AS E-TRANMITS FEATURE, AUTOCAD)
+//  - !!!!!!!!! QUICK !!!!!!!!
+//  - 1. Export Sheetset to PDF Just One Click
+//  - 2. Change Printer of All Sheets Just One Click
 // -------------------------------------------------------------------------------------
 // 2016-05-25: Adding basic Properties & Methods
 //             - Properties: Title
@@ -28,7 +31,11 @@ using System.Collections.Generic;
 
 namespace QuickPrint.AutoCAD
 {
-    internal class SheetSet
+
+    /// <summary>
+    /// A Collection of Sheets
+    /// </summary>
+    internal class SheetSet : SheetsetBase
     {
 
     }

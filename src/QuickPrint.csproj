@@ -63,9 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoCAD\EPlotConfig.cs" />
+    <Compile Include="AutoCAD\ISheetset.cs" />
     <Compile Include="AutoCAD\notes.cs" />
     <Compile Include="AutoCAD\PublicFunction.cs" />
     <Compile Include="AutoCAD\Sheet.cs" />
+    <Compile Include="AutoCAD\SheetSet.cs" />
+    <Compile Include="AutoCAD\SheetsetBase.cs" />
     <Compile Include="AutoShutdownPrompt.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace QuickPrint.CTB
 {
@@ -45,5 +46,24 @@ namespace QuickPrint.CTB
             get { return m_CustomLineweightDisplayUnits; }
             set { m_CustomLineweightDisplayUnits = value; }
         }
+        public StringBuilder Content { get; set; }
+        #region Public Methods
+        public void GenerateContent()
+        { 
+        
+        }
+        #endregion
+        #region Contructors
+        public CTBFile()
+        {
+            Content = new StringBuilder();
+
+        }
+        public CTBFile(PrintType printType) : this()
+        {
+            PrintType = printType;
+        
+        }
+        #endregion
     }
 }
