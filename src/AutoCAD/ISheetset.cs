@@ -6,6 +6,9 @@ using System.Text;
 
 namespace QuickPrint.AutoCAD
 {
+    /// <summary>
+    /// Sheetset interface
+    /// </summary>
     public interface ISheetset
     {
         void AddSheet();

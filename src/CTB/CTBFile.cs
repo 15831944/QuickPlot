@@ -49,8 +49,20 @@ namespace QuickPrint.CTB
         public StringBuilder Content { get; set; }
         #region Public Methods
         public void GenerateContent()
-        { 
-        
+        {
+            Content.AppendLine("description=\'\'");
+            Content.AppendLine("aci_table_available=" + AciTableAvailable);
+            Content.AppendLine("scale_factor=" + ScaleFactor);
+            Content.AppendLine("apply_factor=" + ApplyFactor);
+            Content.AppendLine("custom_lineweight_display_units=" + CustomLineweightDisplayUnits);
+            Content.AppendLine("aci_table{");
+            //
+            for (int i = 0; i < 255; i++)
+            {
+                Content.AppendLine(i + "=\"Color_" + (i + 1));
+            }
+            Content.AppendLine("}");
+
         }
         #endregion
         #region Contructors
