@@ -5230,7 +5230,7 @@ namespace VisualWget
         {
             if (this.logTextBox.Text.Length < 0) return;
             this.saveFileDialog1.Filter = "CTB Files|*.ctb|STB Files|*.stb";
-            this.saveFileDialog1.FileName = Path.GetDirectoryName(this.openFileDialog1.FileName) + "\\_" + Path.GetFileName(this.openFileDialog1.FileName);
+           // this.saveFileDialog1.FileName = Path.GetDirectoryName(this.openFileDialog1.FileName) + "\\_" + Path.GetFileName(this.openFileDialog1.FileName);
             this.saveFileDialog1.DefaultExt = "." + Path.GetExtension(this.openFileDialog1.FileName);
             switch (this.saveFileDialog1.DefaultExt)
             {
@@ -5298,7 +5298,13 @@ namespace VisualWget
         private void menuItem15_Click(object sender, EventArgs e)
         {
             CTBColor clo1 = new CTBColor(0);
-            MessageBox.Show(clo1.Content.ToString());
+            this.logTextBox.Text = clo1.Content.ToString();
+        }
+
+        private void menuItem16_Click(object sender, EventArgs e)
+        {
+            CTBFile ctbFile = new CTBFile();
+            this.logTextBox.Text = ctbFile.Content.ToString();
         }
 
     }

@@ -39,11 +39,13 @@ namespace QuickPrint.CTB
         #region Constructors
         public CTBColor()
         {
+            Id = 0;
             LinepatternSize = 0.5;
             Linetype = 31;
             FillStyle = 73;
             EndStyle = 4;
             JoinStyle = 5;
+            AdaptiveLinetype = true;
             UpdateContent();
         }
         public CTBColor(int id) : this()

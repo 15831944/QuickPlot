@@ -148,13 +148,14 @@ namespace VisualWget
             this.menuItem11 = new System.Windows.Forms.MenuItem();
             this.menuItem12 = new System.Windows.Forms.MenuItem();
             this.menuItem13 = new System.Windows.Forms.MenuItem();
+            this.menuItem15 = new System.Windows.Forms.MenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.menuItem15 = new System.Windows.Forms.MenuItem();
+            this.menuItem16 = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -999,7 +1000,8 @@ namespace VisualWget
             this.menuItem11,
             this.menuItem12,
             this.menuItem13,
-            this.menuItem15});
+            this.menuItem15,
+            this.menuItem16});
             this.menuItem10.Text = "CTB";
             // 
             // menuItem11
@@ -1019,6 +1021,12 @@ namespace VisualWget
             this.menuItem13.Index = 2;
             this.menuItem13.Text = "PC3";
             this.menuItem13.Click += new System.EventHandler(this.menuItem13_Click);
+            // 
+            // menuItem15
+            // 
+            this.menuItem15.Index = 3;
+            this.menuItem15.Text = "CTBColor";
+            this.menuItem15.Click += new System.EventHandler(this.menuItem15_Click);
             // 
             // panel1
             // 
@@ -1071,11 +1079,11 @@ namespace VisualWget
             this.logTextBox.Enter += new System.EventHandler(this.logTextBox_Enter);
             this.logTextBox.Leave += new System.EventHandler(this.logTextBox_Leave);
             // 
-            // menuItem15
+            // menuItem16
             // 
-            this.menuItem15.Index = 3;
-            this.menuItem15.Text = "CTBColor";
-            this.menuItem15.Click += new System.EventHandler(this.menuItem15_Click);
+            this.menuItem16.Index = 4;
+            this.menuItem16.Text = "CTB File";
+            this.menuItem16.Click += new System.EventHandler(this.menuItem16_Click);
             // 
             // MainForm
             // 
@@ -1233,5 +1241,6 @@ namespace VisualWget
         private System.Windows.Forms.MenuItem menuItem13;
         private System.Windows.Forms.MenuItem menuItem14;
         private System.Windows.Forms.MenuItem menuItem15;
+        private System.Windows.Forms.MenuItem menuItem16;
     }
 }
