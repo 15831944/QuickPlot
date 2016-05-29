@@ -154,6 +154,7 @@ namespace VisualWget
             this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.menuItem15 = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -997,7 +998,8 @@ namespace VisualWget
             this.menuItem10.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem11,
             this.menuItem12,
-            this.menuItem13});
+            this.menuItem13,
+            this.menuItem15});
             this.menuItem10.Text = "CTB";
             // 
             // menuItem11
@@ -1068,6 +1070,12 @@ namespace VisualWget
             this.logTextBox.WordWrap = false;
             this.logTextBox.Enter += new System.EventHandler(this.logTextBox_Enter);
             this.logTextBox.Leave += new System.EventHandler(this.logTextBox_Leave);
+            // 
+            // menuItem15
+            // 
+            this.menuItem15.Index = 3;
+            this.menuItem15.Text = "CTBColor";
+            this.menuItem15.Click += new System.EventHandler(this.menuItem15_Click);
             // 
             // MainForm
             // 
@@ -1224,5 +1232,6 @@ namespace VisualWget
         private System.Windows.Forms.MenuItem menuItem12;
         private System.Windows.Forms.MenuItem menuItem13;
         private System.Windows.Forms.MenuItem menuItem14;
+        private System.Windows.Forms.MenuItem menuItem15;
     }
 }

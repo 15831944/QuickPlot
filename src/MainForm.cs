@@ -5295,5 +5295,11 @@ namespace VisualWget
             }
         }
 
+        private void menuItem15_Click(object sender, EventArgs e)
+        {
+            CTBColor clo1 = new CTBColor(0);
+            MessageBox.Show(clo1.Content.ToString());
+        }
+
     }
 }

@@ -77,9 +77,11 @@
     </Compile>
     <Compile Include="CTB\Crc\CRC32.cs" />
     <Compile Include="CTB\Crc\CrcCalculatorStream.cs" />
+    <Compile Include="CTB\CTBColor.cs" />
     <Compile Include="CTB\CTBFile.cs" />
     <Compile Include="CTB\CTBRec.cs" />
     <Compile Include="CTB\notes.cs" />
+    <Compile Include="CTB\PrintType.cs" />
     <Compile Include="CTB\PublicFunctions.cs" />
     <Compile Include="CTB\Zlib\Adler.cs" />
     <Compile Include="CTB\Zlib\BlockState.cs" />

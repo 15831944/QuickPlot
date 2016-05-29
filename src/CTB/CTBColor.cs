@@ -1,19 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 namespace QuickPrint.CTB
 {
-    public class CTBColor
+    public class CTBColor : INotifyPropertyChanged
     {
-        public string Name { get; set; }
-        public string LocalizedName { get; set; }
+        #region Noty
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
+        public string Name { get { return "Color_" + (Id + 1); } }
+        public string LocalizedName { get { return "Color_" + (Id + 1); } }
         public string Description { get; set; }
-        public int Color { get; set; }
-        public int ColorPolicy { get; set; }
-        public int PhysicalPenNumber { get; set; }
-        public int VirtualPenNumber { get; set; }
+        public const int Color = -16777216;
+        public const int ColorPolicy = 5;
+        public const int PhysicalPenNumber = 0;
+        public const int VirtualPenNumber = 0;
         public int Screen { get; set; }
         public double LinepatternSize { get; set; }
         public int Linetype { get; set; }
@@ -27,17 +39,40 @@ namespace QuickPrint.CTB
         #region Constructors
         public CTBColor()
         {
-            Content = new StringBuilder();
+            LinepatternSize = 0.5;
+            Linetype = 31;
+            FillStyle = 73;
+            EndStyle = 4;
+            JoinStyle = 5;
+            UpdateContent();
         }
         public CTBColor(int id) : this()
         {
             Id = id;
+            UpdateContent();
         }
         #endregion
         #region Public Methods
-        public void GenerateContent()
+        public void UpdateContent()
         {
-
+            Content = new StringBuilder();
+            Content.AppendLine(Id + "{");
+            Content.AppendLine("name=\"" + Name);
+            Content.AppendLine("localized_name=\"" + LocalizedName);
+            Content.AppendLine("description=\"");
+            Content.AppendLine("color=" + Color);
+            Content.AppendLine("color_policy=" + ColorPolicy);
+            Content.AppendLine("physical_pen_number=" + PhysicalPenNumber);
+            Content.AppendLine("virtual_pen_number=" + VirtualPenNumber);
+            Content.AppendLine("screen=" + Screen);
+            Content.AppendLine("linepattern_size=" + LinepatternSize);
+            Content.AppendLine("linetype=" + Linetype);
+            Content.AppendLine("adaptive_linetype=" + AdaptiveLinetype.ToString().ToUpper());
+            Content.AppendLine("lineweight=" + Lineweight);
+            Content.AppendLine("fill_style=" + FillStyle);
+            Content.AppendLine("end_style=" + EndStyle);
+            Content.AppendLine("join_style=" + JoinStyle);
+            Content.AppendLine("}");
         }
         #endregion
     }

@@ -4,10 +4,6 @@ using System.Text;
 
 namespace QuickPrint.CTB
 {
-    public enum PrintType { 
-        BlackAndWhite = 0,
-        Color = 1
-    }
 
     public class CTBFile
     {
