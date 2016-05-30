@@ -4081,7 +4081,7 @@ namespace VisualWget
 
                 SetAsForegroundWindow();
 
-                string input = Interaction.InputBox(Util.translationList["000233"], Util.translationList["000234"], Util.GetSetting("SpeedLimitList"), Left + 40, Top + 30);
+                string input = "?????";// Interaction.InputBox(Util.translationList["000233"], Util.translationList["000234"], Util.GetSetting("SpeedLimitList"), Left + 40, Top + 30);
 
                 if (input.Length > 0)
                 {
@@ -4267,7 +4267,7 @@ namespace VisualWget
 
         private void jlv_j_setHttpRefererMenuItem_Click(object sender, EventArgs e)
         {
-            string input = Interaction.InputBox("Please enter the HTTP Referer URL.\nEnter 'clear' to clear the referer.", "Set HTTP Referer", "", Left + 40, Top + 30);
+            string input = "????";//Interaction.InputBox("Please enter the HTTP Referer URL.\nEnter 'clear' to clear the referer.", "Set HTTP Referer", "", Left + 40, Top + 30);
 
             if (input.Length > 0)
             {

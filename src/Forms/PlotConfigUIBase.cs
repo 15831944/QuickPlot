@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 using System.Windows.Forms;
 using Autodesk.AutoCAD.Interop;
 ﻿using Autodesk.AutoCAD.Interop.Common;
@@ -21,7 +21,7 @@ namespace QuickPrint.Forms
         public AcadApplication AcApplication
         {
             get { return m_acApp; }
-            set 
+            set
             {
                 m_acApp = value;
 
@@ -44,7 +44,7 @@ namespace QuickPrint.Forms
         [DefaultValue("")]
         public string WhatToPlot { get; private set; }
 
-        
+
         #endregion
 
         public PlotConfigUIBase()
@@ -69,7 +69,7 @@ namespace QuickPrint.Forms
             {
                 // Init device cause init paper size
                 string[] devices = AcApplication.ActiveDocument
-                                    .ActiveLayout.GetPlotDeviceNames();
+                                    .ActiveLayout.GetPlotDeviceNames() as string[];
                 if (devices.Length > 0)
                 {
                     cboPlotter.Items.AddRange(devices);
@@ -85,6 +85,14 @@ namespace QuickPrint.Forms
                 };
                 cboWhatToPlot.Items.AddRange(whattoplot);
                 cboWhatToPlot.SelectedIndex = 2;
+
+                // Init units for scale
+                cboScUnits.Items.Add("mm");
+                cboScUnits.Items.Add("inches");
+                cboScUnits.SelectedIndex = 0;
+
+                // Init for plot style tables
+
             }
             catch
             {
@@ -96,7 +104,7 @@ namespace QuickPrint.Forms
         {
             // Sets device to temp. plotConfig
             m_tempAcPlConfig.ConfigName = cboPlotter.Text;
-            string[] papers = m_tempAcPlConfig.GetCanonicalMediaNames();
+            string[] papers = m_tempAcPlConfig.GetCanonicalMediaNames() as string[];
 
             // Re-sets for paper size combobox
             cboPaperSize.Items.Clear();
@@ -160,11 +168,14 @@ namespace QuickPrint.Forms
             if (chkFit.Checked)
             {
                 cboScale.Enabled = false;
-                
+                txtScNumerator.Enabled = false;
+                txtScDenominator.Enabled = false;
             }
             else
             {
-
+                cboScale.Enabled = true;
+                txtScNumerator.Enabled = true;
+                txtScDenominator.Enabled = true;
             }
         }
     }

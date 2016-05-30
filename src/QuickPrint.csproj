@@ -54,27 +54,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoCAD\EPlotConfig.cs" />
+    <Compile Include="AutoCAD\AcadApp.cs" />
     <Compile Include="AutoCAD\ISheetset.cs" />
     <Compile Include="AutoCAD\notes.cs" />
     <Compile Include="AutoCAD\PublicFunction.cs" />
-    <Compile Include="AutoCAD\Sheet.cs" />
-    <Compile Include="AutoCAD\SheetSet.cs" />
     <Compile Include="AutoCAD\SheetsetBase.cs" />
+    <Compile Include="AutoCAD\Utils.cs" />
     <Compile Include="AutoShutdownPrompt.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AutoShutdownPrompt.Designer.cs">
       <DependentUpon>AutoShutdownPrompt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\ISheetSetBase.cs" />
+    <Compile Include="Components\ISheetSetPlot.cs" />
+    <Compile Include="Components\Sheet.cs" />
+    <Compile Include="Components\SheetSet.cs" />
     <Compile Include="CTB\Crc\CRC32.cs" />
     <Compile Include="CTB\Crc\CrcCalculatorStream.cs" />
     <Compile Include="CTB\CTBColor.cs" />
@@ -110,6 +114,12 @@
     <Compile Include="CTB\Zlib\ZlibException.cs" />
     <Compile Include="CTB\Zlib\ZlibStream.cs" />
     <Compile Include="CTB\Zlib\ZlibStreamFlavor.cs" />
+    <Compile Include="Forms\PlotConfigUIBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\PlotConfigUIBase.Designer.cs">
+      <DependentUpon>PlotConfigUIBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="IO\notes.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobDialog.cs">
@@ -124,6 +134,9 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\EHandle.cs" />
+    <Compile Include="Model\EPlotConfig.cs" />
+    <Compile Include="Model\EPoint2D.cs" />
     <Compile Include="NewCTBFileDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +171,9 @@
     <EmbeddedResource Include="AutoShutdownPrompt.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AutoShutdownPrompt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlotConfigUIBase.resx">
+      <DependentUpon>PlotConfigUIBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JobDialog.resx">
       <SubType>Designer</SubType>

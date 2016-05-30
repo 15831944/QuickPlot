@@ -34,3 +34,4 @@ C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\QuickPrint.exe
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\QuickPrint.pdb
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\bin\Debug\SheetXControls.dll
 C:\Data\Projects\C#\QuickPlot\QuickPlot\src\bin\Debug\SheetXControls.pdb
+C:\Data\Projects\C#\QuickPlot\QuickPlot\src\obj\Debug\QuickPrint.Forms.PlotConfigUIBase.resources

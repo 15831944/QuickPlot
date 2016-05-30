@@ -64,14 +64,25 @@ namespace QuickPrint.Components
         public EHandle Handle
         {
             get { return m_handle; }
-            set 
+            set
             {
                 m_handle = value;
-                foreach (dynamic dyn in m_sets)
+                foreach (object obj in m_sets)
                 {
-                    dyn.Handle = new EHandle(
-                        this.Handle.Grade + 1, this.Handle.Order, dyn.Handle.Order
-                        );
+                    if (obj is Sheet)
+                    {
+                        Sheet sh = obj as Sheet;
+                        sh.Handle = new EHandle(
+                            this.Handle.Grade + 1, this.Handle.Order, sh.Handle.Order
+                            );
+                    }
+                    else
+                    {
+                        SheetSet sh = obj as SheetSet;
+                        sh.Handle = new EHandle(
+                            this.Handle.Grade + 1, this.Handle.Order, sh.Handle.Order
+                            );
+                    }
                 }
             }
         }
@@ -139,7 +150,7 @@ namespace QuickPrint.Components
         /// Add another sheet set to this (= sheet set)
         /// </summary>
         /// <param name="ss">Is sheet or sheetSet</param>
-        public void Add(dynamic ss)
+        public void Add(object ss)
         {
             if (ss is Sheet || ss is SheetSet)
             {
@@ -153,10 +164,22 @@ namespace QuickPrint.Components
                 }
                 else
                 {
-                    ss.Handle = new EHandle(
-                        this.Handle.Grade + 1, this.Handle.Order, m_sets.Count
-                    );
-                    m_sets.Add(ss);
+                    if (ss is Sheet)
+                    {
+                        Sheet s = ss as Sheet;
+                        s.Handle = new EHandle(
+                            this.Handle.Grade + 1, this.Handle.Order, m_sets.Count
+                        );
+                        m_sets.Add(s);
+                    }
+                    else
+                    {
+                        SheetSet s = ss as SheetSet;
+                        s.Handle = new EHandle(
+                            this.Handle.Grade + 1, this.Handle.Order, m_sets.Count
+                        );
+                        m_sets.Add(s);
+                    }
                 }
             }
         }
@@ -176,7 +199,7 @@ namespace QuickPrint.Components
             }
             clone.Title = this.Title;
             clone.Handle = this.Handle;
-            
+
             return clone;
         }
 
@@ -218,18 +241,35 @@ namespace QuickPrint.Components
         public void Plot(AcadApplication acApp)
         {
             // Sort sheetset
-            dynamic[] sets = new dynamic[m_sets.Count];
-            //System.Windows.Forms.MessageBox.Show(m_sets.Count.ToString());
-            
-            foreach (dynamic dyn in m_sets)
+            object[] sets = new object[m_sets.Count];
+
+            foreach (object obj in m_sets)
             {
-                sets[dyn.Handle.Order] = dyn;
+                if (obj is Sheet)
+                {
+                    Sheet s = obj as Sheet;
+                    sets[s.Handle.Order] = obj;
+                }
+                else
+                {
+                    SheetSet s = obj as SheetSet;
+                    sets[s.Handle.Order] = obj;
+                }
             }
 
             // Plot without override config
-            foreach (dynamic obj in sets)
+            foreach (object obj in sets)
             {
-                obj.Plot(acApp);
+                if (obj is Sheet)
+                {
+                    Sheet s = obj as Sheet;
+                    s.Plot(acApp);
+                }
+                else
+                {
+                    SheetSet s = obj as SheetSet;
+                    s.Plot(acApp);
+                }
             }
             System.GC.Collect();
         }
@@ -241,17 +281,37 @@ namespace QuickPrint.Components
         public void Plot(AcadApplication acApp, EPlotConfig pConfig)
         {
             // Sort sheetset
-            dynamic[] sets = new dynamic[m_sets.Count];
-            foreach (dynamic dyn in m_sets)
+            object[] sets = new object[m_sets.Count];
+
+            foreach (object obj in m_sets)
             {
-                sets[dyn.Handle.Order] = dyn;
+                if (obj is Sheet)
+                {
+                    Sheet s = obj as Sheet;
+                    sets[s.Handle.Order] = obj;
+                }
+                else
+                {
+                    SheetSet s = obj as SheetSet;
+                    sets[s.Handle.Order] = obj;
+                }
             }
 
             // Plot without override config
-            foreach (dynamic obj in sets)
+            foreach (object obj in sets)
             {
-                obj.Plot(acApp, pConfig);
+                if (obj is Sheet)
+                {
+                    Sheet s = obj as Sheet;
+                    s.Plot(acApp, pConfig);
+                }
+                else
+                {
+                    SheetSet s = obj as SheetSet;
+                    s.Plot(acApp, pConfig);
+                }
             }
+            System.GC.Collect();
         }
     }
 }

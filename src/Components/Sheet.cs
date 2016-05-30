@@ -169,7 +169,7 @@ namespace QuickPrint.Components
 
             return opFlag;
         }
-        
+
         /// <summary>
         /// Gets window plotted from active document and sets to this
         /// </summary>
@@ -177,14 +177,14 @@ namespace QuickPrint.Components
         {
             // Set focus to acad application
             AcadApp.SetFocus(acApp.HWND);
-            
+
             try
             {
                 // Set window to plot
                 AcadUtility acUtil = acApp.ActiveDocument.Utility;
                 double[] p1, p2;
-                p1 = acUtil.GetPoint(System.Type.Missing, "\nSpecify plot window: ");
-                p2 = acUtil.GetCorner(p1, System.Type.Missing);
+                p1 = acUtil.GetPoint(System.Type.Missing, "\nSpecify plot window: ") as double[];
+                p2 = acUtil.GetCorner(p1, System.Type.Missing) as double[];
                 MinPoint = new EPoint2D(p1[0], p1[1]);
                 MaxPoint = new EPoint2D(p2[0], p2[1]);
 
@@ -261,7 +261,7 @@ namespace QuickPrint.Components
                     acLot.ScaleLineweights = pConfig.IsScaleLineweight;
                     //acLot.PlotOrigin = pConfig.PlotOrigin;
                     acLot.SetCustomScale(pConfig.CustomScale, 1);
-                    
+
                     // Update plot config then Plot
                     acLot.RefreshPlotDeviceInfo();
                     acApp.ActiveDocument.Plot.PlotToDevice();

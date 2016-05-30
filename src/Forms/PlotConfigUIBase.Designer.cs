@@ -60,7 +60,7 @@
             this.txtScDenominator = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.cboScUnits = new System.Windows.Forms.ComboBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -400,14 +400,14 @@
             this.label10.TabIndex = 14;
             this.label10.Text = "units";
             // 
-            // comboBox6
+            // cboScUnits
             // 
-            this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(120, 81);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(63, 21);
-            this.comboBox6.TabIndex = 15;
+            this.cboScUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboScUnits.FormattingEnabled = true;
+            this.cboScUnits.Location = new System.Drawing.Point(120, 81);
+            this.cboScUnits.Name = "cboScUnits";
+            this.cboScUnits.Size = new System.Drawing.Size(63, 21);
+            this.cboScUnits.TabIndex = 15;
             // 
             // checkBox4
             // 
@@ -423,7 +423,7 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.checkBox4);
-            this.groupBox6.Controls.Add(this.comboBox6);
+            this.groupBox6.Controls.Add(this.cboScUnits);
             this.groupBox6.Controls.Add(this.label10);
             this.groupBox6.Controls.Add(this.label11);
             this.groupBox6.Controls.Add(this.txtScDenominator);
@@ -659,7 +659,7 @@
         private System.Windows.Forms.TextBox txtScDenominator;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.ComboBox cboScUnits;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label12;
