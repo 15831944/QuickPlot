@@ -9,15 +9,18 @@ namespace QuickPrint.CTB
     public class CTBColor : INotifyPropertyChanged
     {
         #region Noty
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged(String propertyName = "")
+        protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+                handler(this, e);
         }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         public string Name { get { return "Color_" + (Id + 1); } }
         public string LocalizedName { get { return "Color_" + (Id + 1); } }
@@ -26,11 +29,29 @@ namespace QuickPrint.CTB
         public const int ColorPolicy = 5;
         public const int PhysicalPenNumber = 0;
         public const int VirtualPenNumber = 0;
-        public int Screen { get; set; }
+        int m_Screen = 100;
+        public int Screen
+        {
+            get { return m_Screen; }
+            set { m_Screen = value;
+            UpdateContent();
+            OnPropertyChanged("Screen");
+            }
+        }
         public double LinepatternSize { get; set; }
         public int Linetype { get; set; }
         public bool AdaptiveLinetype { get; set; }
-        public int Lineweight { get; set; }
+        int m_Lineweight = 0;
+        public int Lineweight
+        {
+            get { return m_Lineweight; }
+            set
+            {
+                m_Lineweight = value;
+                UpdateContent();
+                OnPropertyChanged("Lineweight");
+            }
+        }
         public int FillStyle { get; set; }
         public int EndStyle { get; set; }
         public int JoinStyle { get; set; }

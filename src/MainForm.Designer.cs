@@ -146,16 +146,18 @@ namespace VisualWget
             this.menuItem14 = new System.Windows.Forms.MenuItem();
             this.menuItem10 = new System.Windows.Forms.MenuItem();
             this.menuItem11 = new System.Windows.Forms.MenuItem();
+            this.menuItem16 = new System.Windows.Forms.MenuItem();
             this.menuItem12 = new System.Windows.Forms.MenuItem();
             this.menuItem13 = new System.Windows.Forms.MenuItem();
             this.menuItem15 = new System.Windows.Forms.MenuItem();
+            this.menuItem17 = new System.Windows.Forms.MenuItem();
+            this.menuItem18 = new System.Windows.Forms.MenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.menuItem16 = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -929,7 +931,8 @@ namespace VisualWget
             this.menuItem1.Index = 4;
             this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem3,
-            this.menuItem10});
+            this.menuItem10,
+            this.menuItem17});
             this.menuItem1.Text = "Test";
             // 
             // menuItem3
@@ -998,10 +1001,10 @@ namespace VisualWget
             this.menuItem10.Index = 1;
             this.menuItem10.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem11,
+            this.menuItem16,
             this.menuItem12,
             this.menuItem13,
-            this.menuItem15,
-            this.menuItem16});
+            this.menuItem15});
             this.menuItem10.Text = "CTB";
             // 
             // menuItem11
@@ -1010,23 +1013,42 @@ namespace VisualWget
             this.menuItem11.Text = "1. Read CTB";
             this.menuItem11.Click += new System.EventHandler(this.menuItem11_Click);
             // 
+            // menuItem16
+            // 
+            this.menuItem16.Index = 1;
+            this.menuItem16.Text = "2. Generate New CTB File";
+            this.menuItem16.Click += new System.EventHandler(this.menuItem16_Click);
+            // 
             // menuItem12
             // 
-            this.menuItem12.Index = 1;
-            this.menuItem12.Text = "2. Recompress CTB";
+            this.menuItem12.Index = 2;
+            this.menuItem12.Text = "3. Recompress CTB";
             this.menuItem12.Click += new System.EventHandler(this.menuItem12_Click);
             // 
             // menuItem13
             // 
-            this.menuItem13.Index = 2;
+            this.menuItem13.Index = 3;
             this.menuItem13.Text = "PC3";
             this.menuItem13.Click += new System.EventHandler(this.menuItem13_Click);
             // 
             // menuItem15
             // 
-            this.menuItem15.Index = 3;
-            this.menuItem15.Text = "CTBColor";
+            this.menuItem15.Index = 4;
+            this.menuItem15.Text = "Test CTBColor";
             this.menuItem15.Click += new System.EventHandler(this.menuItem15_Click);
+            // 
+            // menuItem17
+            // 
+            this.menuItem17.Index = 2;
+            this.menuItem17.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem18});
+            this.menuItem17.Text = "Dialogs";
+            // 
+            // menuItem18
+            // 
+            this.menuItem18.Index = 0;
+            this.menuItem18.Text = "New CTB File";
+            this.menuItem18.Click += new System.EventHandler(this.menuItem18_Click);
             // 
             // panel1
             // 
@@ -1079,12 +1101,6 @@ namespace VisualWget
             this.logTextBox.Enter += new System.EventHandler(this.logTextBox_Enter);
             this.logTextBox.Leave += new System.EventHandler(this.logTextBox_Leave);
             // 
-            // menuItem16
-            // 
-            this.menuItem16.Index = 4;
-            this.menuItem16.Text = "CTB File";
-            this.menuItem16.Click += new System.EventHandler(this.menuItem16_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1098,7 +1114,7 @@ namespace VisualWget
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Menu = this.mainMenu1;
             this.Name = "MainForm";
-            this.Text = "QuickPrint";
+            this.Text = "SheetX";
             this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -1242,5 +1258,7 @@ namespace VisualWget
         private System.Windows.Forms.MenuItem menuItem14;
         private System.Windows.Forms.MenuItem menuItem15;
         private System.Windows.Forms.MenuItem menuItem16;
+        private System.Windows.Forms.MenuItem menuItem17;
+        private System.Windows.Forms.MenuItem menuItem18;
     }
 }

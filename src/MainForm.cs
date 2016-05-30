@@ -4451,7 +4451,6 @@ namespace VisualWget
         private void menuItem2_Click(object sender, EventArgs e)
         {
            // this.TopMost = false;
-            this.WindowState = FormWindowState.Minimized;
             try
             {
                 object obj = Marshal.GetActiveObject("AutoCAD.Application.17");
@@ -4533,12 +4532,12 @@ namespace VisualWget
                 }
                 else
                 {
-                    MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                    logTextBox.Text = "AutoCAD chưa khởi động hoặc không đúng phiên bản!";
                 }
             }
             catch
             {
-                MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                logTextBox.Text = "AutoCAD chưa khởi động hoặc không đúng phiên bản!";
             }
         }
         
@@ -4563,12 +4562,12 @@ namespace VisualWget
                 }
                 else
                 {
-                    MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                    logTextBox.Text = "AutoCAD chưa khởi động hoặc không đúng phiên bản!";
                 }
             }
             catch
             {
-                MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                logTextBox.Text = "AutoCAD chưa khởi động hoặc không đúng phiên bản!";
             }
             
         }
@@ -4611,12 +4610,12 @@ namespace VisualWget
                 }
                 else
                 {
-                    MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                    logTextBox.Text = "AutoCAD chưa khởi động hoặc không đúng phiên bản!";
                 }
             }
             catch
             {
-                MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                logTextBox.Text = "AutoCAD chưa khởi động hoặc không đúng phiên bản!";
             }
             
         }
@@ -4642,12 +4641,12 @@ namespace VisualWget
                 }
                 else
                 {
-                    MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                    logTextBox.Text = "AutoCAD chưa khởi động hoặc không đúng phiên bản!";
                 }
             }
             catch
             {
-                MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                logTextBox.Text = "AutoCAD chưa khởi động hoặc không đúng phiên bản!";
             }
             
         }
@@ -5286,12 +5285,12 @@ namespace VisualWget
                 }
                 else
                 {
-                    MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                    logTextBox.Text = "AutoCAD chưa khởi động hoặc không đúng phiên bản!";
                 }
             }
             catch
             {
-                MessageBox.Show("AutoCAD chưa khởi động hoặc không đúng phiên bản!");
+                logTextBox.Text = "AutoCAD chưa khởi động hoặc không đúng phiên bản!";
             }
         }
 
@@ -5304,7 +5303,15 @@ namespace VisualWget
         private void menuItem16_Click(object sender, EventArgs e)
         {
             CTBFile ctbFile = new CTBFile();
+            ctbFile.Colors[10].Screen = 50;
+            ctbFile.UpdateContent();
             this.logTextBox.Text = ctbFile.Content.ToString();
+        }
+
+        private void menuItem18_Click(object sender, EventArgs e)
+        {
+            NewCTBFileDialog nCtbDialg = new NewCTBFileDialog();
+            nCtbDialg.ShowDialog();
         }
 
     }

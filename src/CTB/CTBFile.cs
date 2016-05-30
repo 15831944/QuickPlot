@@ -1,13 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Text;
 
 namespace QuickPrint.CTB
 {
 
-    public class CTBFile
+    public class CTBFile : INotifyPropertyChanged
     {
+        #region Noty
+        protected void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
         PrintType m_PrintType = PrintType.BlackAndWhite;
         public PrintType PrintType {
             get { return m_PrintType; }
@@ -44,7 +60,11 @@ namespace QuickPrint.CTB
             get { return m_CustomLineweightDisplayUnits; }
             set { m_CustomLineweightDisplayUnits = value; }
         }
-        public StringBuilder Content { get; set; }
+        public StringBuilder Content
+        {
+            get;
+            set;
+        }
         public List<CTBColor> Colors { get; set; }
         #region Public Methods
         public void UpdateContent()
@@ -57,16 +77,15 @@ namespace QuickPrint.CTB
             Content.AppendLine("custom_lineweight_display_units=" + CustomLineweightDisplayUnits);
             Content.AppendLine("aci_table{");
             //
+            foreach (CTBColor cl in Colors)
+                cl.UpdateContent();
             for (int i = 0; i < 255; i++)
             {
                 Content.AppendLine(i + "=\"Color_" + (i + 1));
             }
             Content.AppendLine("}");
             Content.AppendLine("plot_style{");
-            for (int i = 0; i <= 254; i++)
-            {
-                Colors.Add(new CTBColor(i));
-            }
+
             for (int i = 0; i < Colors.Count; i++)
             {
                 Content.Append(Colors[i].Content.ToString());
@@ -109,6 +128,10 @@ namespace QuickPrint.CTB
         public CTBFile()
         {
             Colors = new List<CTBColor>();
+            for (int i = 0; i <= 254; i++)
+            {
+                Colors.Add(new CTBColor(i));
+            }
             UpdateContent();
         }
         public CTBFile(PrintType printType) : this()

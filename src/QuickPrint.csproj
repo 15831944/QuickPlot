@@ -124,6 +124,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewCTBFileDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCTBFileDialog.Designer.cs">
+      <DependentUpon>NewCTBFileDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewMultipleJobsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     <EmbeddedResource Include="MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewCTBFileDialog.resx">
+      <DependentUpon>NewCTBFileDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewMultipleJobsDialog.resx">
       <DependentUpon>NewMultipleJobsDialog.cs</DependentUpon>
@@ -306,6 +315,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SheetXControls\SheetXControls.csproj">
+      <Project>{40409036-dce4-4b08-ad7f-2b2b5c25d7a1}</Project>
+      <Name>SheetXControls</Name>
+    </ProjectReference>
     <ProjectReference Include="PC3\PiaNO\PiaNO.csproj">
       <Project>{82883b8d-0c5f-4cda-9706-160adaee5539}</Project>
       <Name>PiaNO</Name>
