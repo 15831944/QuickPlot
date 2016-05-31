@@ -106,6 +106,7 @@ namespace VisualWget
             this.columnHeader4,
             this.columnHeader5,
             this.columnHeader6});
+            this.listDrawings.FullRowSelect = true;
             this.listDrawings.GridLines = true;
             this.listDrawings.Location = new System.Drawing.Point(15, 80);
             this.listDrawings.Name = "listDrawings";

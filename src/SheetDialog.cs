@@ -1,3 +1,4 @@
+using QuickPrint.AutoCAD;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -5,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace VisualWget
 {
@@ -288,8 +290,16 @@ namespace VisualWget
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                string fileName = openFileDialog1.FileName;
+                string shortFileName = Path.GetFileName(openFileDialog1.FileName);
                 try
                 {
+                    string[] layouts = Utils.LayoutsFromDWGFile(fileName).ToArray();
+                    foreach (string s in layouts)
+                    {
+                        ListViewItem li = new ListViewItem(new[] { shortFileName, s, "Available" });
+                        this.listDrawings.Items.Add(li);
+                    }
                 }
                 catch (Exception ex)
                 {
