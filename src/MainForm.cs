@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using System.Media;
 using QuickPrint;
+using JCS;
 
 #region AutoCAD
 using Autodesk.AutoCAD;
@@ -26,6 +27,7 @@ using QuickPrint.CTB;
 using System.Text.RegularExpressions;
 using System.Globalization;
 using PiaNO.Plot;
+using QuickPrint.Properties;
 #endregion
 
 namespace VisualWget
@@ -806,6 +808,7 @@ namespace VisualWget
             //
             //this.TopMost = true;
             AddTest();
+            AddControls();
         }
 
         #region Test
@@ -835,6 +838,92 @@ namespace VisualWget
             }
             
         }
+        #endregion
+
+        #region AddControls
+        JCS.ToggleSwitch CurrentAutoCADSwitch;
+        void AddControls()
+        {
+            JCS.ToggleSwitch viewModeTs = new JCS.ToggleSwitch()
+            {
+                Style = JCS.ToggleSwitch.ToggleSwitchStyle.Android,
+                OnText = "TREE",
+                OffText = "DETAILS",
+                OnForeColor = Color.White, 
+                OffForeColor = Color.White, AllowUserChange = true, Size = new Size(110,15)};
+            ToolStripControlHost host = new ToolStripControlHost(viewModeTs) { Alignment = ToolStripItemAlignment.Right};
+           toolStrip1.Items.Add(host);
+
+            //
+           Color tempColor;
+
+           ToggleSwitchFancyRenderer customizedFancyRenderer = new ToggleSwitchFancyRenderer() { CornerRadius = 0 };
+           tempColor = customizedFancyRenderer.LeftSideBackColor1;
+           customizedFancyRenderer.LeftSideBackColor1 = customizedFancyRenderer.RightSideBackColor1;
+           customizedFancyRenderer.RightSideBackColor1 = tempColor;
+           tempColor = customizedFancyRenderer.LeftSideBackColor2;
+           customizedFancyRenderer.LeftSideBackColor2 = customizedFancyRenderer.RightSideBackColor2;
+           customizedFancyRenderer.RightSideBackColor2 = tempColor;
+
+           CurrentAutoCADSwitch = new JCS.ToggleSwitch() { AllowUserChange = true, Size = new Size(125, 15) };
+           CurrentAutoCADSwitch.Style = JCS.ToggleSwitch.ToggleSwitchStyle.Android;
+           CurrentAutoCADSwitch.OnText = "Refresh";
+           //AdvancedBehaviorFancyToggleSwitch.OnFont = new Font(this.Font.FontFamily, 10, FontStyle.Bold);
+           CurrentAutoCADSwitch.OnForeColor = Color.White;
+           CurrentAutoCADSwitch.OffText = "AutoCAD 2007";
+           //AdvancedBehaviorFancyToggleSwitch.OffFont = new Font(this.Font.FontFamily, 10, FontStyle.Bold);
+           CurrentAutoCADSwitch.OffForeColor = Color.White;
+           CurrentAutoCADSwitch.OffButtonImage = Resources.refresh2;
+           CurrentAutoCADSwitch.UseAnimation = false;
+           CurrentAutoCADSwitch.SetRenderer(customizedFancyRenderer);
+           CurrentAutoCADSwitch.CheckedChanged += AdvancedBehaviorFancyToggleSwitch_CheckedChanged;
+
+           AnimatedGifPictureBox.Parent = CurrentAutoCADSwitch; //Necessary to get the ToggleSwitch button to show through the picture box' transparent background
+
+           ToolStripControlHost host2 = new ToolStripControlHost(CurrentAutoCADSwitch) { Alignment = ToolStripItemAlignment.Right };
+          toolStrip1.Items.Add(host2);
+          SimulateRestartBackgroundWorker.DoWork += new DoWorkEventHandler(SimulateRestartBackgroundWorker_DoWork);
+          this.SimulateRestartBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.SimulateRestartBackgroundWorker_RunWorkerCompleted);
+        }
+
+        private void AdvancedBehaviorFancyToggleSwitch_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (CurrentAutoCADSwitch.Checked)
+            {
+                CurrentAutoCADSwitch.AllowUserChange = false;
+                CurrentAutoCADSwitch.OnText = "Refreshing...";
+
+              PositionAniGifPictureBox();
+              AnimatedGifPictureBox.Visible = true;
+
+              if (!SimulateRestartBackgroundWorker.IsBusy)
+                    SimulateRestartBackgroundWorker.RunWorkerAsync();
+            }
+            else
+            {
+                CurrentAutoCADSwitch.AllowUserChange = true;
+                CurrentAutoCADSwitch.OnText = "Refresh";
+            }
+        }
+        private void PositionAniGifPictureBox()
+        {
+            Rectangle buttonRectangle = CurrentAutoCADSwitch.ButtonRectangle;
+
+            AnimatedGifPictureBox.Height = buttonRectangle.Height - 2;
+            AnimatedGifPictureBox.Width = AnimatedGifPictureBox.Height;
+            AnimatedGifPictureBox.Left = buttonRectangle.X + ((buttonRectangle.Width - AnimatedGifPictureBox.Width) / 2);
+            AnimatedGifPictureBox.Top = buttonRectangle.Y + ((buttonRectangle.Height - AnimatedGifPictureBox.Height) / 2);
+        }
+        private void SimulateRestartBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Thread.Sleep(1500);
+        }
+        private void SimulateRestartBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            AnimatedGifPictureBox.Visible = false;
+            CurrentAutoCADSwitch.Checked = false;
+        }
+        BackgroundWorker SimulateRestartBackgroundWorker = new System.ComponentModel.BackgroundWorker();
         #endregion
 
         void listenServer_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -1526,7 +1615,7 @@ namespace VisualWget
 
             try
             {
-                File.WriteAllLines(Path.Combine(dir, "DownloadList.cfg"), lines.ToArray());
+                //File.WriteAllLines(Path.Combine(dir, "DownloadList.cfg"), lines.ToArray());
             }
             catch (Exception ex)
             {
@@ -2907,9 +2996,7 @@ namespace VisualWget
         private void jobsNewMenuItem_Click(object sender, EventArgs e)
         {
            // NewJob("");
-            SheetDialog sheetDlg = new SheetDialog();
-            sheetDlg.StartPosition = FormStartPosition.CenterParent;
-            sheetDlg.ShowDialog();
+            ImportSheets();
         }
 
         private void jobsEditMenuItem_Click(object sender, EventArgs e)
@@ -3134,6 +3221,17 @@ namespace VisualWget
                 );
         }
 
+        void ImportSheets()
+        {
+            SheetDialog sheetDlg = new SheetDialog();
+            sheetDlg.StartPosition = FormStartPosition.CenterParent;
+
+            if (sheetDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                MessageBox.Show(sheetDlg.Sheets.ToString());
+            }
+        }
+
         private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
         {
             string s = e.Button.Name;
@@ -3141,16 +3239,12 @@ namespace VisualWget
             if (s == "newToolBarButton")
             {
                 //NewJob("");
-                SheetDialog sheetDlg = new SheetDialog();
-                sheetDlg.StartPosition = FormStartPosition.CenterParent;
-                sheetDlg.ShowDialog();
+                ImportSheets();
             }
             else if (s == "newMultipleToolBarButton")
             {
                 //NewMultipleJobs();
-                SheetDialog sheetDlg = new SheetDialog();
-                sheetDlg.StartPosition = FormStartPosition.CenterParent;
-                sheetDlg.ShowDialog();
+                ImportSheets();
             }
             else if (s == "editToolBarButton")
             {
@@ -5353,9 +5447,17 @@ namespace VisualWget
 
         private void menuItem20_Click(object sender, EventArgs e)
         {
-            SheetDialog sheetdialog = new SheetDialog();
-            sheetdialog.StartPosition = FormStartPosition.CenterParent;
-            sheetdialog.ShowDialog();
+            ImportSheets();
+        }
+
+        private void btnNewSheet_Click(object sender, EventArgs e)
+        {
+            ImportSheets();
+        }
+
+        private void btnImportSheets_Click(object sender, EventArgs e)
+        {
+            ImportSheets();
         }
 
     }

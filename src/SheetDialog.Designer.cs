@@ -32,7 +32,7 @@ namespace VisualWget
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Browse = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnImport = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.listDrawings = new QuickPrint.Forms.DrawingListView();
@@ -72,14 +72,15 @@ namespace VisualWget
             this.checkBox1.Text = "Prefix sheet titles with file name";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnImport
             // 
-            this.button2.Location = new System.Drawing.Point(148, 385);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(130, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "&Import Checked";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnImport.Location = new System.Drawing.Point(148, 385);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(130, 23);
+            this.btnImport.TabIndex = 4;
+            this.btnImport.Text = "&Import Checked";
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // button3
             // 
@@ -102,6 +103,7 @@ namespace VisualWget
             // 
             // listDrawings
             // 
+            this.listDrawings.CheckBoxes = true;
             this.listDrawings.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4,
             this.columnHeader5,
@@ -136,7 +138,7 @@ namespace VisualWget
             this.Controls.Add(this.listDrawings);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnImport);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.btn_Browse);
             this.Controls.Add(this.label1);
@@ -164,7 +166,7 @@ namespace VisualWget
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_Browse;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private QuickPrint.Forms.DrawingListView listDrawings;

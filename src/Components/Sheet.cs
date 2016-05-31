@@ -40,7 +40,7 @@ namespace QuickPrint.Components
         /// <summary>
         /// Name of layout that contains this sheets
         /// </summary>
-        private string Name = "";
+        public string Name = "";
 
         /// <summary>
         /// Check if this sheet is ready for plot

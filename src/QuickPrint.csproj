@@ -82,6 +82,21 @@
     <Compile Include="Forms\DrawingListView\DrawingListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\ToggleSwitch\GraphicsExtensionMethods.cs" />
+    <Compile Include="Forms\ToggleSwitch\ImageHelper.cs" />
+    <Compile Include="Forms\ToggleSwitch\Renderers\ToggleSwitchAndroidRenderer.cs" />
+    <Compile Include="Forms\ToggleSwitch\Renderers\ToggleSwitchBrushedMetalRenderer.cs" />
+    <Compile Include="Forms\ToggleSwitch\Renderers\ToggleSwitchCarbonRenderer.cs" />
+    <Compile Include="Forms\ToggleSwitch\Renderers\ToggleSwitchFancyRenderer.cs" />
+    <Compile Include="Forms\ToggleSwitch\Renderers\ToggleSwitchIOS5Renderer.cs" />
+    <Compile Include="Forms\ToggleSwitch\Renderers\ToggleSwitchIphoneRenderer.cs" />
+    <Compile Include="Forms\ToggleSwitch\Renderers\ToggleSwitchMetroRenderer.cs" />
+    <Compile Include="Forms\ToggleSwitch\Renderers\ToggleSwitchModernRenderer.cs" />
+    <Compile Include="Forms\ToggleSwitch\Renderers\ToggleSwitchOSXRenderer.cs" />
+    <Compile Include="Forms\ToggleSwitch\Renderers\ToggleSwitchRendererBase.cs" />
+    <Compile Include="Forms\ToggleSwitch\ToggleSwitch.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SheetDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -312,6 +327,16 @@
     <Content Include="CTB\mono.txt" />
     <None Include="Resources\refresh16.png" />
     <None Include="Resources\mono.txt.txt" />
+    <Content Include="Forms\ToggleSwitch\ToggleSwitch.csproj" />
+    <Content Include="Forms\ToggleSwitch\VersionHistory.txt" />
+    <None Include="Resources\iconPrintPreview.png" />
+    <None Include="Resources\Image70.png" />
+    <None Include="Resources\loading-circle.gif" />
+    <None Include="Resources\loading.gif" />
+    <None Include="Resources\refresh.png" />
+    <None Include="Resources\refresh2.png" />
+    <None Include="Resources\pdf.png" />
+    <None Include="Resources\pdf32.png" />
     <Content Include="Resources\splash.png" />
   </ItemGroup>
   <ItemGroup>

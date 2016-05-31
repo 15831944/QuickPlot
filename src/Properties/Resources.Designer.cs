@@ -82,6 +82,26 @@ namespace QuickPrint.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconPrintPreview {
+            get {
+                object obj = ResourceManager.GetObject("iconPrintPreview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Image70 {
+            get {
+                object obj = ResourceManager.GetObject("Image70", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap JobsListView_Finished {
             get {
                 object obj = ResourceManager.GetObject("JobsListView_Finished", resourceCulture);
@@ -135,6 +155,26 @@ namespace QuickPrint.Properties {
         internal static System.Drawing.Bitmap JobsListView_Stopped {
             get {
                 object obj = ResourceManager.GetObject("JobsListView_Stopped", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap loading {
+            get {
+                object obj = ResourceManager.GetObject("loading", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap loading_circle {
+            get {
+                object obj = ResourceManager.GetObject("loading-circle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -262,9 +302,49 @@ namespace QuickPrint.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pdf {
+            get {
+                object obj = ResourceManager.GetObject("pdf", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pdf32 {
+            get {
+                object obj = ResourceManager.GetObject("pdf32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap refresh {
+            get {
+                object obj = ResourceManager.GetObject("refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap refresh16 {
             get {
                 object obj = ResourceManager.GetObject("refresh16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap refresh2 {
+            get {
+                object obj = ResourceManager.GetObject("refresh2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

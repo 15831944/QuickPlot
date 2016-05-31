@@ -117,80 +117,105 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="updinfoLink" xml:space="preserve">
-    <value>http://enesy.vn/updinfo.txt</value>
-  </data>
-  <data name="websiteLink" xml:space="preserve">
-    <value>http://enesy.vn</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="MainToolbar_Stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainToolbar_Stop.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MainToolbar_Start" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainToolbar_Start.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="JobsListView_Retrieving" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\JobsListView_Retrieving.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="JobsListView_Ready" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\JobsListView_Ready.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="MainToolbar_New_Multiple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainToolbar_New_Multiple.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MainToolbar_New" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MainToolbar_New.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="JobsListView_Finished" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\JobsListView_Finished.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="JobsListView_Queued" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\JobsListView_Queued.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MainToolbar_MoveDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainToolbar_MoveDown.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MainToolbar_Preferences" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainToolbar_Preferences.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="JobsListView_Stopped" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\JobsListView_Stopped.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="MainToolbar_Remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MainToolbar_Remove.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MainToolbar_Edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainToolbar_Edit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="JobsListView_Running" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\JobsListView_Running.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MainToolbar_MoveUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainToolbar_MoveUp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MainToolbar_OpenContainingFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainToolbar_OpenContainingFolder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="App" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\App.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Tray" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Tray.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="discussionGroupLink" xml:space="preserve">
-    <value>http://enesy.vn</value>
-  </data>
-  <data name="MainToolbar_New_Multiple" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainToolbar_New_Multiple.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconPrintPreview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconPrintPreview.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MainToolbar_Speed_Limit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MainToolbar_Speed_Limit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MainToolbar_DefaultDownloadOptions" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainToolbar_DefaultDownloadOptions.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pdf.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MainToolbar_Edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainToolbar_Edit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\refresh.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MainToolbar_Preferences" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainToolbar_Preferences.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MainToolbar_OpenContainingFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainToolbar_OpenContainingFolder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tray.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JobsListView_Queued" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\JobsListView_Queued.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MainToolbar_Stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainToolbar_Stop.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JobsListView_Stopped" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\JobsListView_Stopped.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="updinfoLink" xml:space="preserve">
+    <value>http://enesy.vn/updinfo.txt</value>
+  </data>
+  <data name="MainToolbar_MoveUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainToolbar_MoveUp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JobsListView_Retrieving" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\JobsListView_Retrieving.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JobsListView_Running" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\JobsListView_Running.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JobsListView_Ready" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\JobsListView_Ready.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JobsListView_Finished" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\JobsListView_Finished.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MainToolbar_Start" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainToolbar_Start.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MainToolbar_MoveDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainToolbar_MoveDown.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="loading" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loading.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refresh16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\refresh16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="App" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\App.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Image70" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Image70.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="splash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\splash.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="refresh16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\refresh16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="websiteLink" xml:space="preserve">
+    <value>http://enesy.vn</value>
+  </data>
+  <data name="refresh2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\refresh2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="discussionGroupLink" xml:space="preserve">
+    <value>http://enesy.vn</value>
+  </data>
+  <data name="MainToolbar_DefaultDownloadOptions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainToolbar_DefaultDownloadOptions.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="loading-circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loading-circle.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pdf32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pdf32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

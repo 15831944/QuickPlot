@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Linq;
+using QuickPrint.Components;
 
 namespace VisualWget
 {
@@ -22,6 +23,7 @@ namespace VisualWget
         public SheetDialog()
         {
             InitializeComponent();
+            Sheets = new List<Sheet>();
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -278,6 +280,7 @@ namespace VisualWget
 
         private void button3_Click(object sender, EventArgs e)
         {
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.Close();
         }
 
@@ -294,10 +297,12 @@ namespace VisualWget
                 string shortFileName = Path.GetFileName(openFileDialog1.FileName);
                 try
                 {
-                    string[] layouts = Utils.LayoutsFromDWGFile(fileName).ToArray();
-                    foreach (string s in layouts)
+                    List<Sheet> sheets = Utils.LayoutsFromDWGFile(fileName);
+                    this.Sheets = sheets;
+                    foreach (Sheet s in sheets)
                     {
-                        ListViewItem li = new ListViewItem(new[] { shortFileName, s, "Available" });
+                        ListViewItem li = new ListViewItem(new[] { fileName, s.Name, "Available" });
+                        li.Checked = true;
                         this.listDrawings.Items.Add(li);
                     }
                 }
@@ -307,5 +312,15 @@ namespace VisualWget
                 }
             }
         }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            if (Sheets != null && Sheets.Count() > 0)
+            {
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                this.Close();
+            }
+        }
+        internal IEnumerable<Sheet> Sheets { get; set; }
     }
 }

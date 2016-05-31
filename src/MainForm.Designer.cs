@@ -153,16 +153,25 @@ namespace VisualWget
             this.menuItem15 = new System.Windows.Forms.MenuItem();
             this.menuItem17 = new System.Windows.Forms.MenuItem();
             this.menuItem18 = new System.Windows.Forms.MenuItem();
+            this.menuItem20 = new System.Windows.Forms.MenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.AnimatedGifPictureBox = new System.Windows.Forms.PictureBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.menuItem20 = new System.Windows.Forms.MenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnNewSheet = new System.Windows.Forms.ToolStripButton();
+            this.btnImportSheets = new System.Windows.Forms.ToolStripButton();
+            this.btnPreview = new System.Windows.Forms.ToolStripButton();
+            this.btnPDF = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AnimatedGifPictureBox)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -203,6 +212,7 @@ namespace VisualWget
             this.toolBar1.ShowToolTips = true;
             this.toolBar1.Size = new System.Drawing.Size(738, 31);
             this.toolBar1.TabIndex = 0;
+            this.toolBar1.Visible = false;
             this.toolBar1.Wrappable = false;
             this.toolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
             this.toolBar1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolBar1_MouseDown);
@@ -1060,6 +1070,12 @@ namespace VisualWget
             this.menuItem18.Text = "New CTB File";
             this.menuItem18.Click += new System.EventHandler(this.menuItem18_Click);
             // 
+            // menuItem20
+            // 
+            this.menuItem20.Index = 1;
+            this.menuItem20.Text = "New Sheet Dialog";
+            this.menuItem20.Click += new System.EventHandler(this.menuItem20_Click);
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.panel2);
@@ -1075,12 +1091,22 @@ namespace VisualWget
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.AnimatedGifPictureBox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(738, 214);
             this.panel2.TabIndex = 0;
+            // 
+            // AnimatedGifPictureBox
+            // 
+            this.AnimatedGifPictureBox.Image = global::QuickPrint.Properties.Resources.loading;
+            this.AnimatedGifPictureBox.Location = new System.Drawing.Point(613, 89);
+            this.AnimatedGifPictureBox.Name = "AnimatedGifPictureBox";
+            this.AnimatedGifPictureBox.Size = new System.Drawing.Size(18, 18);
+            this.AnimatedGifPictureBox.TabIndex = 0;
+            this.AnimatedGifPictureBox.TabStop = false;
             // 
             // splitter1
             // 
@@ -1111,17 +1137,64 @@ namespace VisualWget
             this.logTextBox.Enter += new System.EventHandler(this.logTextBox_Enter);
             this.logTextBox.Leave += new System.EventHandler(this.logTextBox_Leave);
             // 
-            // menuItem20
+            // toolStrip1
             // 
-            this.menuItem20.Index = 1;
-            this.menuItem20.Text = "New Sheet Dialog";
-            this.menuItem20.Click += new System.EventHandler(this.menuItem20_Click);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnNewSheet,
+            this.btnImportSheets,
+            this.btnPreview,
+            this.btnPDF});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 31);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(738, 25);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnNewSheet
+            // 
+            this.btnNewSheet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnNewSheet.Image = global::QuickPrint.Properties.Resources.MainToolbar_New;
+            this.btnNewSheet.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNewSheet.Name = "btnNewSheet";
+            this.btnNewSheet.Size = new System.Drawing.Size(23, 22);
+            this.btnNewSheet.Text = "toolStripButton1";
+            this.btnNewSheet.Click += new System.EventHandler(this.btnNewSheet_Click);
+            // 
+            // btnImportSheets
+            // 
+            this.btnImportSheets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnImportSheets.Image = global::QuickPrint.Properties.Resources.MainToolbar_New_Multiple;
+            this.btnImportSheets.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnImportSheets.Name = "btnImportSheets";
+            this.btnImportSheets.Size = new System.Drawing.Size(23, 22);
+            this.btnImportSheets.Text = "toolStripButton2";
+            this.btnImportSheets.Click += new System.EventHandler(this.btnImportSheets_Click);
+            // 
+            // btnPreview
+            // 
+            this.btnPreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnPreview.Image = global::QuickPrint.Properties.Resources.iconPrintPreview;
+            this.btnPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(23, 22);
+            this.btnPreview.Text = "toolStripButton3";
+            // 
+            // btnPDF
+            // 
+            this.btnPDF.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnPDF.Image = global::QuickPrint.Properties.Resources.pdf32;
+            this.btnPDF.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPDF.Name = "btnPDF";
+            this.btnPDF.Size = new System.Drawing.Size(23, 22);
+            this.btnPDF.Text = "toolStripButton1";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(738, 491);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusBar1);
             this.Controls.Add(this.toolBar1);
@@ -1141,7 +1214,12 @@ namespace VisualWget
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.AnimatedGifPictureBox)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1278,5 +1356,11 @@ namespace VisualWget
         private System.Windows.Forms.MenuItem menuItem18;
         private System.Windows.Forms.MenuItem menuItem19;
         private System.Windows.Forms.MenuItem menuItem20;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btnNewSheet;
+        private System.Windows.Forms.ToolStripButton btnImportSheets;
+        private System.Windows.Forms.ToolStripButton btnPreview;
+        private System.Windows.Forms.PictureBox AnimatedGifPictureBox;
+        private System.Windows.Forms.ToolStripButton btnPDF;
     }
 }
