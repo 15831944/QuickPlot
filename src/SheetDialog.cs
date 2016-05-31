@@ -298,29 +298,38 @@ namespace VisualWget
                 try
                 {
                     List<Sheet> sheets = Utils.LayoutsFromDWGFile(fileName);
-                    this.Sheets = sheets;
                     foreach (Sheet s in sheets)
                     {
-                        ListViewItem li = new ListViewItem(new[] { fileName, s.Name, "Available" });
+                        ListViewItem li = new ListViewItem(new[] { fileName, s.Name, "Available"});
+                        li.Tag = s;
                         li.Checked = true;
                         this.listDrawings.Items.Add(li);
                     }
+                    
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            if (Sheets != null && Sheets.Count() > 0)
+            if (listDrawings.Items.Count > 0)
             {
+                foreach (ListViewItem li in listDrawings.Items)
+                {
+                    if (li.Checked == true)
+                    {
+                        this.Sheets.Add((Sheet)li.Tag);
+                    }
+                }
+
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
                 this.Close();
             }
         }
-        internal IEnumerable<Sheet> Sheets { get; set; }
+        internal List<Sheet> Sheets { get; set; }
     }
 }

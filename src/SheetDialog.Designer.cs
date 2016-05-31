@@ -31,7 +31,7 @@ namespace VisualWget
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SheetDialog));
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Browse = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chckPrefixWithFilename = new System.Windows.Forms.CheckBox();
             this.btnImport = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -60,17 +60,17 @@ namespace VisualWget
             this.btn_Browse.UseVisualStyleBackColor = true;
             this.btn_Browse.Click += new System.EventHandler(this.btn_Browse_Click);
             // 
-            // checkBox1
+            // chckPrefixWithFilename
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(15, 340);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(226, 21);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "Prefix sheet titles with file name";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chckPrefixWithFilename.AutoSize = true;
+            this.chckPrefixWithFilename.Checked = true;
+            this.chckPrefixWithFilename.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckPrefixWithFilename.Location = new System.Drawing.Point(15, 340);
+            this.chckPrefixWithFilename.Name = "chckPrefixWithFilename";
+            this.chckPrefixWithFilename.Size = new System.Drawing.Size(226, 21);
+            this.chckPrefixWithFilename.TabIndex = 3;
+            this.chckPrefixWithFilename.Text = "Prefix sheet titles with file name";
+            this.chckPrefixWithFilename.UseVisualStyleBackColor = true;
             // 
             // btnImport
             // 
@@ -139,7 +139,7 @@ namespace VisualWget
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.btnImport);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.chckPrefixWithFilename);
             this.Controls.Add(this.btn_Browse);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -165,7 +165,7 @@ namespace VisualWget
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_Browse;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chckPrefixWithFilename;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;

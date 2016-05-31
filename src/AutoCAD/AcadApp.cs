@@ -42,5 +42,22 @@ namespace QuickPrint.AutoCAD
             IntPtr hWnd = new IntPtr(acApphWnd);
             SetForegroundWindow(hWnd);
         }
+
+        //TODO: Check if AutoCAD is Opening
+        public static bool IsAutoCADOpening()
+        {
+            try
+            {
+                object obj = Marshal.GetActiveObject("AutoCAD.Application.17");
+                if (obj != null)
+                {
+                    return true;
+                }
+                else
+                return false;
+            }
+            catch { return false; }
+        }
     }
 }
+

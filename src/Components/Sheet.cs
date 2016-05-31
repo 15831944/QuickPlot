@@ -35,7 +35,7 @@ namespace QuickPrint.Components
         /// <summary>
         /// Path of file that contains this sheet
         /// </summary>
-        private string Path = "";
+        public string Path = "";
 
         /// <summary>
         /// Name of layout that contains this sheets
@@ -64,12 +64,16 @@ namespace QuickPrint.Components
         /// <summary>
         /// Title of new sheetSet (subSet)
         /// </summary>
-        [DefaultValue("New Set")]
+        [DefaultValue("New Seet")]
         public string Title
         {
             get;
             set;
         }
+
+        public int Id { get; set; }
+        public string PlotStyleTable { get; set; }
+        public string Printer { get; set; }
 
         /// <summary>
         /// Handle of sheet. Default value = (1,0,1) as First sheet
@@ -86,6 +90,7 @@ namespace QuickPrint.Components
         /// </summary>
         public Sheet()
         {
+            Id = 0;
         }
 
         /// <summary>
@@ -97,17 +102,19 @@ namespace QuickPrint.Components
         public Sheet(EPoint2D minPoint, EPoint2D maxPoint,
                      string sheetPath, string layoutName
             )
+            : this()
         {
             MinPoint = minPoint;
             MaxPoint = maxPoint;
             Path = sheetPath;
             Name = layoutName;
         }
-        public Sheet(string sheetPath, string layoutName)
+        public Sheet(string sheetPath, string layoutName):this()
         {
             Path = sheetPath;
             Name = layoutName;
         }
+
 
         /// <summary>
         /// Opening sheet on acad application
@@ -294,5 +301,9 @@ namespace QuickPrint.Components
          * 3. If sheet is plotted in type of plot as "window", adding Set Window Plotted
          *    (set MinPoint & MaxPoint) for layout function;
         */
+        public override string ToString()
+        {
+            return "Sheet";
+        }
     }
 }

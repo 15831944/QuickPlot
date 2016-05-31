@@ -16,6 +16,7 @@ using Microsoft.VisualBasic;
 using System.Media;
 using QuickPrint;
 using JCS;
+using System.Linq;
 
 #region AutoCAD
 using Autodesk.AutoCAD;
@@ -28,6 +29,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using PiaNO.Plot;
 using QuickPrint.Properties;
+using QuickPrint.Components;
 #endregion
 
 namespace VisualWget
@@ -113,6 +115,11 @@ namespace VisualWget
         ColumnHeader speedColumnHeader;
         ColumnHeader etaColumnHeader;
         ColumnHeader noteColumnHeader;
+
+        ColumnHeader printerColumnHeader;
+        ColumnHeader ctbColumnHeader;
+        ColumnHeader pathColumnHeader;
+
         int sortCol;
         bool sortAsc;
         BackgroundWorker listenServer;
@@ -135,267 +142,7 @@ namespace VisualWget
         ImageList jobsListViewImageList;
         int timerHalfSecCount;
 
-        class JobsListView : ListView
-        {
-            public JobsListView()
-            {
-                DoubleBuffered = true;
-            }
-
-            public void UpdateInfo()
-            {
-                UpdateInfo(new Rectangle(0, 0, 0, 0));
-            }
-
-            public void UpdateInfo(Rectangle updateRect)
-            {
-                if (TopItem != null)
-                {
-                    for (int i = TopItem.Index; i < Items.Count; i++)
-                    {
-                        ListViewItem lvi = Items[i];
-
-                        if (lvi.Bounds.Top > DisplayRectangle.Bottom)
-                        {
-                            break;
-                        }
-
-                        if (!updateRect.IsEmpty
-                            && !updateRect.Contains(lvi.Bounds))
-                        {
-                            if (lvi.Bounds.Bottom > DisplayRectangle.Bottom)
-                            {
-                                if (!updateRect.Contains(new Rectangle(lvi.Bounds.Left, lvi.Bounds.Top, lvi.Bounds.Width, DisplayRectangle.Bottom - lvi.Bounds.Top)))
-                                {
-                                    continue;
-                                }
-                            }
-                            else
-                            {
-                                continue;
-                            }
-                        }
-
-                        Job job = (Job)lvi.Tag;
-                        JobStatus status = job.GetStatus();
-
-                        int imgInd = (int)status;
-
-                        if (lvi.ImageIndex != imgInd)
-                        {
-                            lvi.ImageIndex = imgInd;
-                        }
-
-                        string name = job.Name;
-
-                        if (lvi.SubItems[0].Text != name)
-                        {
-                            lvi.SubItems[0].Text = name;
-                        }
-
-                        string numText = job.Num.ToString();
-
-                        if (lvi.SubItems[1].Text != numText)
-                        {
-                            lvi.SubItems[1].Text = numText;
-                        }
-
-                        string sizeText = job.SizeText;
-
-                        if (lvi.SubItems[2].Text != sizeText)
-                        {
-                            lvi.SubItems[2].Text = sizeText;
-                        }
-
-                        string doneText = job.DoneText;
-
-                        if (lvi.SubItems[3].Text != doneText)
-                        {
-                            lvi.SubItems[3].Text = doneText;
-                        }
-
-                        string statusText;
-
-                        if (status == JobStatus.Ready)
-                        {
-                            statusText = Util.translationList["000155"];
-                        }
-                        else if (status == JobStatus.Queued)
-                        {
-                            statusText = Util.translationList["000156"];
-                        }
-                        else if (status == JobStatus.Running)
-                        {
-                            statusText = Util.translationList["000157"];
-                        }
-                        else if (status == JobStatus.Retrieving)
-                        {
-                            statusText = Util.translationList["000158"];
-                        }
-                        else if (status == JobStatus.Stopped)
-                        {
-                            statusText = Util.translationList["000159"];
-                        }
-                        else if (status == JobStatus.Finished)
-                        {
-                            statusText = Util.translationList["000160"];
-                        }
-                        else
-                        {
-                            Debug.Assert(false);
-                            statusText = "";
-                        }
-
-                        statusText += ((status == JobStatus.Stopped && job.RetryCount > 0) ? string.Format(" ({0})", job.RetryCount) : "");
-
-                        if (lvi.SubItems[4].Text != statusText)
-                        {
-                            lvi.SubItems[4].Text = statusText;
-                        }
-
-                        if (status == JobStatus.Retrieving)
-                        {
-                            string speedText = job.SpeedText;
-
-                            if (lvi.SubItems[5].Text != speedText)
-                            {
-                                lvi.SubItems[5].Text = speedText;
-                            }
-
-                            string etaText = job.EtaText;
-
-                            if (lvi.SubItems[6].Text != etaText)
-                            {
-                                lvi.SubItems[6].Text = etaText;
-                            }
-                        }
-                        else
-                        {
-                            if (job.Speed != -1 || job.Eta != -1)
-                            {
-                                job.ClearSpeed();
-                            }
-
-                            if (lvi.SubItems[5].Text != "")
-                            {
-                                lvi.SubItems[5].Text = "";
-                            }
-
-                            if (lvi.SubItems[6].Text != "")
-                            {
-                                lvi.SubItems[6].Text = "";
-                            }
-                        }
-
-                        string noteText = job.NoteText;
-
-                        if (lvi.SubItems[7].Text != noteText)
-                        {
-                            lvi.SubItems[7].Text = noteText;
-                        }
-                    }
-                }
-            }
-
-            protected override void WndProc(ref Message m)
-            {
-                if (m.Msg == ((0x0400 + 0x1c00) + 0x004E) /* OCM_NOTIFY */)
-                {
-                    NMHDR hdr = (NMHDR)m.GetLParam(typeof(NMHDR));
-
-                    if (hdr.code == (0 - 12) /* NM_CUSTOMDRAW */)
-                    {
-                        m.Result = (IntPtr)OnCustomDraw((NMLVCUSTOMDRAW)m.GetLParam(typeof(NMLVCUSTOMDRAW)));
-
-                        return;
-                    }
-                }
-                else if (m.Msg == 0x000F /* WM_PAINT */)
-                {
-                    RECT rect = new RECT();
-
-                    if (Util.GetUpdateRect(Handle, out rect, false))
-                    {
-                        UpdateInfo(new Rectangle(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top));
-                    }
-                }
-
-                base.WndProc(ref m);
-            }
-
-            CustomDrawReturnFlags OnCustomDraw(NMLVCUSTOMDRAW lvcd)
-            {
-                DrawstageFlags df = (DrawstageFlags)lvcd.nmcd.dwDrawStage;
-
-                if (df == DrawstageFlags.CDDS_PREPAINT)
-                {
-                    return CustomDrawReturnFlags.CDRF_NOTIFYITEMDRAW;
-                }
-
-                if (df == DrawstageFlags.CDDS_ITEMPREPAINT)
-                {
-                    return CustomDrawReturnFlags.CDRF_NOTIFYSUBITEMDRAW;
-                }
-
-                if (df == (DrawstageFlags.CDDS_SUBITEM | DrawstageFlags.CDDS_ITEMPREPAINT))
-                {
-                    return CustomDrawReturnFlags.CDRF_NOTIFYPOSTPAINT;
-                }
-
-                if (df == (DrawstageFlags.CDDS_SUBITEM | DrawstageFlags.CDDS_ITEMPOSTPAINT))
-                {
-                    if (lvcd.iSubItem == 3) // Done
-                    {
-                        ListViewItem lvi = Items[lvcd.nmcd.dwItemSpec];
-
-                        if (lvi.SubItems[3].Text != "" && lvi.ListView.Columns[3].Width != 0)
-                        {
-                            float value = float.Parse(lvi.SubItems[3].Text.Split(' ')[0]);
-                            Rectangle bounds = lvi.SubItems[3].Bounds;
-
-                            if (value < 0)
-                            {
-                                value = 0;
-                            }
-                            else if (value > 100)
-                            {
-                                value = 100;
-                            }
-
-                            bounds.Inflate(-2, -2);
-
-                            using (Graphics g = Graphics.FromHdc(lvcd.nmcd.hdc))
-                            {
-                                RectangleF rcItem = new RectangleF(bounds.X + 1, bounds.Y + 1, bounds.Width - 2, bounds.Height - 2);
-                                RectangleF rcLeft = new RectangleF(bounds.X + 1, bounds.Y + 1, (bounds.Width - 2) * value / 100, bounds.Height - 2);
-                                RectangleF rcRight = new RectangleF(bounds.X + 1 + (bounds.Width - 2) * value / 100, bounds.Y + 1, bounds.Width - 2 - ((bounds.Width - 2) * value / 100), bounds.Height - 2);
-                                StringFormat sf = new StringFormat();
-
-                                g.FillRectangle(new SolidBrush(Color.FromKnownColor(KnownColor.Highlight)), rcLeft);
-                                g.FillRectangle(new SolidBrush(Color.FromKnownColor(KnownColor.Window)), rcRight);
-
-                                sf.Alignment = StringAlignment.Center;
-                                sf.LineAlignment = StringAlignment.Center;
-                                sf.FormatFlags = StringFormatFlags.NoWrap;
-
-                                g.SetClip(rcLeft);
-                                g.DrawString(string.Format("{0:F} %", value), Util.GetInterfaceFont(), new SolidBrush(Color.FromKnownColor(KnownColor.HighlightText)), rcItem, sf);
-
-                                g.SetClip(rcRight);
-                                g.DrawString(string.Format("{0:F} %", value), Util.GetInterfaceFont(), new SolidBrush(Color.FromKnownColor(KnownColor.WindowText)), rcItem, sf);
-
-                                g.SetClip(bounds);
-                                g.DrawRectangle(new Pen(Color.FromKnownColor(KnownColor.Control)), bounds.X, bounds.Y, bounds.Width - 1, bounds.Height - 1);
-                            }
-                        }
-                    }
-
-                    return CustomDrawReturnFlags.CDRF_DODEFAULT;
-                }
-
-                return CustomDrawReturnFlags.CDRF_DODEFAULT;
-            }
-        }
+        
 
         void jobsListView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
@@ -769,7 +516,7 @@ namespace VisualWget
                     noteColumnHeader
                 });
 
-            jobsListView.Dock = DockStyle.Fill;
+           // jobsListView.Dock = DockStyle.Fill;
             jobsListView.FullRowSelect = true;
             jobsListView.HideSelection = false;
             jobsListView.Name = "jobsListView";
@@ -784,12 +531,18 @@ namespace VisualWget
             jobsListView.ColumnReordered += new ColumnReorderedEventHandler(jobsListView_ColumnReordered);
             jobsListView.SelectedIndexChanged += new EventHandler(jobsListView_SelectedIndexChanged);
             jobsListView.ShowItemToolTips = true;
+            jobsListView.Visible = false;
 
             InitializeComponent();
 
             toolBar1.ImageList = toolBar1ImageList;
             jobsListView.ContextMenu = jobsListViewContextMenu;
             panel2.Controls.Add(jobsListView);
+
+            //
+            
+           
+            //
 
             notifyIcon1.ContextMenu = trayContextMenu;
 
@@ -810,6 +563,8 @@ namespace VisualWget
             AddTest();
             AddControls();
         }
+
+        SheetsListView SheetsListview = new SheetsListView();
 
         #region Test
         void AddTest()
@@ -870,7 +625,11 @@ namespace VisualWget
            CurrentAutoCADSwitch.OnText = "Refresh";
            //AdvancedBehaviorFancyToggleSwitch.OnFont = new Font(this.Font.FontFamily, 10, FontStyle.Bold);
            CurrentAutoCADSwitch.OnForeColor = Color.White;
-           CurrentAutoCADSwitch.OffText = "AutoCAD 2007";
+           string s="Not Open";
+           if (AcadApp.IsAutoCADOpening())
+               s = "AutoCAD 2007";
+
+           CurrentAutoCADSwitch.OffText = s;
            //AdvancedBehaviorFancyToggleSwitch.OffFont = new Font(this.Font.FontFamily, 10, FontStyle.Bold);
            CurrentAutoCADSwitch.OffForeColor = Color.White;
            CurrentAutoCADSwitch.OffButtonImage = Resources.refresh2;
@@ -886,10 +645,12 @@ namespace VisualWget
           this.SimulateRestartBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.SimulateRestartBackgroundWorker_RunWorkerCompleted);
 
             // printer Combobox
-          ComboBox printerCombobox = new ComboBox();
+          ComboBox printerCombobox = new ComboBox() { DropDownStyle = ComboBoxStyle.DropDownList};
           ToolStripControlHost host3 = new ToolStripControlHost(printerCombobox) { Alignment = ToolStripItemAlignment.Right,
-          Margin = new Padding(0,0,10,0), Text = "(Printers)"};
+          Margin = new Padding(0,0,10,0)};
+          printerCombobox.Items.AddRange(PrinterHelp.GetAllPrinters().ToArray());
           toolStrip1.Items.Add(host3);
+          toolStrip1.Items.Add(new ToolStripLabel("Printer:") { Alignment = ToolStripItemAlignment.Right });
           // CT Combobox
           ComboBox ctbCombobox = new ComboBox();
           ToolStripControlHost host4 = new ToolStripControlHost(ctbCombobox)
@@ -899,10 +660,88 @@ namespace VisualWget
               Text = "(CTBs)"
           };
           toolStrip1.Items.Add(host4);
+            //
+          toolStrip1.Items.Add(new ToolStripLabel("Plot Style Table:") { Alignment = ToolStripItemAlignment.Right });
+
+            // Copy
+          NumericUpDown numberCopy = new NumericUpDown() { Value = 1 };
+          ToolStripControlHost host5 = new ToolStripControlHost(numberCopy)
+          {
+              Alignment = ToolStripItemAlignment.Right,
+              Margin = new Padding(0, 0, 10, 0)
+          };
+          toolStrip1.Items.Add(host5);
+          toolStrip1.Items.Add(new ToolStripLabel("Number of copies:") { Alignment = ToolStripItemAlignment.Right });
+
+            // SheetListView
+          panel2.Controls.Add(SheetsListview);
+          SheetsListview.View = View.Details;
+
+          numColumnHeader = new ColumnHeader();
+          numColumnHeader.Name = "numColumnHeader";
+          numColumnHeader.Text = "#";
+          numColumnHeader.TextAlign = HorizontalAlignment.Right;
+
+          nameColumnHeader = new ColumnHeader();
+          nameColumnHeader.Name = "nameColumnHeader";
+          nameColumnHeader.Text = "Name";
+
+
+          statusColumnHeader = new ColumnHeader();
+          statusColumnHeader.Name = "statusColumnHeader";
+          statusColumnHeader.Text = "Status";
+
+          ctbColumnHeader = new ColumnHeader();
+          ctbColumnHeader.Name = "ctbColumnHeader";
+          ctbColumnHeader.Text = "CTB";
+
+          printerColumnHeader = new ColumnHeader();
+          printerColumnHeader.Name = "printerColumnHeader";
+          printerColumnHeader.Text = "Printer";
+
+          pathColumnHeader = new ColumnHeader();
+          pathColumnHeader.Name = "pathColumnHeader";
+          pathColumnHeader.Width = 200;
+          pathColumnHeader.Text = "Path";
+
+          SheetsListview.Columns.AddRange(new ColumnHeader[] {
+                    numColumnHeader,      
+                    nameColumnHeader,
+                    statusColumnHeader,
+                    ctbColumnHeader,
+                    printerColumnHeader,
+                    pathColumnHeader
+                });
+
+          SheetsListview.Dock = DockStyle.Fill;
+          SheetsListview.FullRowSelect = true;
+          SheetsListview.HideSelection = false;
+          SheetsListview.Name = "sheetListView";
+          SheetsListview.TabIndex = 0;
+          SheetsListview.View = View.Details;
+          SheetsListview.HeaderStyle = ColumnHeaderStyle.Clickable;
+          SheetsListview.SmallImageList = jobsListViewImageList;
+          SheetsListview.DoubleClick += new EventHandler(jobsListView_DoubleClick);
+          SheetsListview.ColumnClick += new ColumnClickEventHandler(jobsListView_ColumnClick);
+          SheetsListview.KeyDown += new KeyEventHandler(jobsListView_KeyDown);
+          SheetsListview.AllowColumnReorder = true;
+          SheetsListview.ColumnReordered += new ColumnReorderedEventHandler(jobsListView_ColumnReordered);
+          SheetsListview.SelectedIndexChanged += new EventHandler(jobsListView_SelectedIndexChanged);
+          SheetsListview.ShowItemToolTips = true;
+          SheetsListview.ContextMenu = jobsListViewContextMenu;
+        }
+
+        void UpdateAutoCADState()
+        {
+            string s = "Not Open";
+            if (AcadApp.IsAutoCADOpening())
+                s = "AutoCAD 2007";
+            CurrentAutoCADSwitch.OffText = s;
         }
 
         private void AdvancedBehaviorFancyToggleSwitch_CheckedChanged(object sender, System.EventArgs e)
         {
+            UpdateAutoCADState();
             if (CurrentAutoCADSwitch.Checked)
             {
                 CurrentAutoCADSwitch.AllowUserChange = false;
@@ -931,7 +770,7 @@ namespace VisualWget
         }
         private void SimulateRestartBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            Thread.Sleep(1500);
+            Thread.Sleep(500);
         }
         private void SimulateRestartBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
@@ -1149,7 +988,7 @@ namespace VisualWget
 
                 if (jobsListView.SelectedIndices.Count == 1)
                 {
-                    canOpenFolder = TestOpenContainingFolder((Job)jobsListView.Items[jobsListView.SelectedIndices[0]].Tag);
+                    canOpenFolder = TestOpenContainingFolder((Sheet)SheetsListview.Items[this.SheetsListview.SelectedIndices[0]].Tag);
                 }
 
                 jobsOpenContainingFolderMenuItem.Enabled = openContainingFolderToolBarButton.Enabled = jlv_j_openContainingFolderMenuItem.Enabled = canOpenFolder;
@@ -1770,7 +1609,7 @@ namespace VisualWget
             jobsListView.ListViewItemSorter = new ListViewItemComparer(sortCol, sortAsc);
             EnableDisableToolbarButtonsAndMenuItems();
             toolBar1.Height = 25;
-            toolBar1.Visible = viewToolbarMenuItem.Checked = bool.Parse(Util.GetSetting("ShowToolbar"));
+            //toolBar1.Visible = viewToolbarMenuItem.Checked = bool.Parse(Util.GetSetting("ShowToolbar"));
             splitter1.Visible = logTextBox.Visible = viewLogMenuItem.Checked = bool.Parse(Util.GetSetting("ShowLog"));
             statusBar1.Visible = viewStatusBarMenuItem.Checked = bool.Parse(Util.GetSetting("ShowStatusBar"));
             logTextBox.Height = int.Parse(Util.GetSetting("LogHeight"));
@@ -2738,15 +2577,15 @@ namespace VisualWget
             }
         }
 
-        void OpenContainingFolder(Job j, ref bool test)
+        void OpenContainingFolder(Sheet j, ref bool test)
         {
-            string locf = j.LocalFile;
+            string locf = j.Path;
 
             if (locf != "")
             {
                 if (!Path.IsPathRooted(locf))
                 {
-                    locf = Path.Combine(Path.GetDirectoryName(Util.WgetPath), j.LocalFile);
+                    locf = Path.Combine(Path.GetDirectoryName(Util.WgetPath), j.Path);
                 }
             }
 
@@ -2763,23 +2602,8 @@ namespace VisualWget
             {
                 try
                 {
-                    string path;
 
-                    if (j.Opts.ContainsKey("directory-prefix"))
-                    {
-                        path = j.Opts["directory-prefix"];
-
-                        if (!Path.IsPathRooted(path))
-                        {
-                            path = Path.Combine(Path.GetDirectoryName(Util.WgetPath), path);
-                        }
-                    }
-                    else
-                    {
-                        path = Path.GetDirectoryName(Util.WgetPath);
-                    }
-
-                    DirectoryInfo di = new DirectoryInfo(path);
+                    DirectoryInfo di = new DirectoryInfo(locf);
 
                     if (di.Exists)
                     {
@@ -2816,7 +2640,8 @@ namespace VisualWget
             }
         }
 
-        bool TestOpenContainingFolder(Job j)
+
+        bool TestOpenContainingFolder(Sheet j)
         {
             bool test = true;
 
@@ -2825,7 +2650,7 @@ namespace VisualWget
             return test;
         }
 
-        void OpenContainingFolder(Job j)
+        void OpenContainingFolder(Sheet j)
         {
             bool test = false;
 
@@ -2836,7 +2661,7 @@ namespace VisualWget
         {
             if (jobsListView.SelectedIndices.Count == 1)
             {
-                OpenContainingFolder((Job)jobsListView.Items[jobsListView.SelectedIndices[0]].Tag);
+                OpenContainingFolder((Sheet)this.SheetsListview.Items[SheetsListview.SelectedIndices[0]].Tag);
             }
         }
 
@@ -3243,7 +3068,10 @@ namespace VisualWget
 
             if (sheetDlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
-                MessageBox.Show(sheetDlg.Sheets.ToString());
+                foreach (Sheet s in sheetDlg.Sheets)
+                {
+                    this.SheetsListview.AddSheet(s);
+                }
             }
         }
 
@@ -3346,7 +3174,7 @@ namespace VisualWget
         {
             if (notifyIcon1.Tag != null)
             {
-                OpenContainingFolder((Job)notifyIcon1.Tag);
+                OpenContainingFolder((Sheet)notifyIcon1.Tag);
             }
         }
 
@@ -3592,30 +3420,30 @@ namespace VisualWget
 
         private void jobsListViewContextMenu_Popup(object sender, EventArgs e)
         {
-            Point pt = jobsListView.PointToClient(MousePosition);
+            Point pt = SheetsListview.PointToClient(MousePosition);
 
-            if (jobsListView.SelectedIndices.Count > 0
-                && jobsListView.TopItem != null
-                && (jobsListView.TopItem.Bounds.Top <= pt.Y || pt.Y < 0))
+            if (SheetsListview.SelectedIndices.Count > 0
+                && SheetsListview.TopItem != null
+                && (SheetsListview.TopItem.Bounds.Top <= pt.Y || pt.Y < 0))
             {
                 foreach (MenuItem mi in jobsListViewContextMenu.MenuItems)
                 {
-                    mi.Visible = (mi.Tag != null && mi.Tag.ToString() == "j");
+                    mi.Visible = (mi.Tag != null && mi.Tag.ToString() == "sheet");
                 }
             }
             else
             {
                 int top;
 
-                if (jobsListView.TopItem == null)
+                if (SheetsListview.TopItem == null)
                 {
-                    jobsListView.Items.Add("");
-                    top = jobsListView.TopItem.Bounds.Top;
-                    jobsListView.Items.RemoveAt(0);
+                    SheetsListview.Items.Add("");
+                    top = SheetsListview.TopItem.Bounds.Top;
+                    SheetsListview.Items.RemoveAt(0);
                 }
                 else
                 {
-                    top = jobsListView.TopItem.Bounds.Top;
+                    top = SheetsListview.TopItem.Bounds.Top;
                 }
 
                 if (0 <= pt.Y && pt.Y < top)
@@ -5473,6 +5301,57 @@ namespace VisualWget
         private void btnImportSheets_Click(object sender, EventArgs e)
         {
             ImportSheets();
+        }
+
+        private void jlv_j_previewMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SheetsListview.SelectedIndices.Count > 0)
+            {
+                foreach (ListViewItem li in SheetsListview.SelectedItems)
+                {
+                    Sheet s = li.Tag as Sheet;
+                    // Preview (missing)
+                }
+            }
+        }
+
+        private void menuItem21_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                object obj = Marshal.GetActiveObject("AutoCAD.Application.17");
+                if (obj != null)
+                {
+                    gbl_app = obj as AcadApplication;
+                }
+                else
+                {
+                    gbl_app = new AcadApplication();
+                    gbl_app.Visible = true;
+                    AcadApp.SetFocus(gbl_app.HWND);
+                }
+
+                try
+                {
+                    if (SheetsListview.SelectedIndices.Count > 0)
+                    {
+                        foreach (ListViewItem li in SheetsListview.SelectedItems)
+                        {
+                            Sheet s = li.Tag as Sheet;
+                            s.Open(gbl_app);
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+                    logTextBox.Text =  ex.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                logTextBox.Text = ex.ToString();
+            }
+            
         }
 
     }

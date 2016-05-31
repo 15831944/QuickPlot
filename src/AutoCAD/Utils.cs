@@ -19,8 +19,8 @@ namespace QuickPrint.AutoCAD
             if (acad == null)
             {
                 acad = new AcadApplication();
-                //acad.Visible = true;
-                //AcadApp.SetFocus(acad.HWND);
+                acad.Visible = true;
+                AcadApp.SetFocus(acad.HWND);
             }
             AcadDocument doc = acad.Documents.Open(path, true);
 

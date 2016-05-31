@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoCAD\AcadApp.cs" />
+    <Compile Include="AutoCAD\AutoCADVersion.cs" />
     <Compile Include="AutoCAD\ISheetset.cs" />
     <Compile Include="AutoCAD\notes.cs" />
     <Compile Include="AutoCAD\PublicFunction.cs" />
@@ -82,6 +83,9 @@
     <Compile Include="Forms\DrawingListView\DrawingListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\SheetListView\SheetListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\ToggleSwitch\GraphicsExtensionMethods.cs" />
     <Compile Include="Forms\ToggleSwitch\ImageHelper.cs" />
     <Compile Include="Forms\ToggleSwitch\Renderers\ToggleSwitchAndroidRenderer.cs" />
@@ -97,6 +101,10 @@
     <Compile Include="Forms\ToggleSwitch\ToggleSwitch.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="JobListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Printer\PrinterHelp.cs" />
     <Compile Include="SheetDialog.cs">
       <SubType>Form</SubType>
     </Compile>

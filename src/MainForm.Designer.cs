@@ -164,15 +164,17 @@ namespace VisualWget
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNewSheet = new System.Windows.Forms.ToolStripButton();
             this.btnImportSheets = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPreview = new System.Windows.Forms.ToolStripButton();
             this.btnPDF = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.jlv_j_previewMenuItem = new System.Windows.Forms.MenuItem();
+            this.menuItem21 = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -212,12 +214,13 @@ namespace VisualWget
             this.defaultDownloadOptionsToolBarButton,
             this.preferencesToolBarButton,
             this.speedLimitToolBarButton});
+            this.toolBar1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolBar1.DropDownArrows = true;
-            this.toolBar1.Location = new System.Drawing.Point(0, 0);
+            this.toolBar1.Location = new System.Drawing.Point(247, 114);
             this.toolBar1.Margin = new System.Windows.Forms.Padding(4);
             this.toolBar1.Name = "toolBar1";
             this.toolBar1.ShowToolTips = true;
-            this.toolBar1.Size = new System.Drawing.Size(738, 31);
+            this.toolBar1.Size = new System.Drawing.Size(436, 72);
             this.toolBar1.TabIndex = 0;
             this.toolBar1.Visible = false;
             this.toolBar1.Wrappable = false;
@@ -339,8 +342,10 @@ namespace VisualWget
             // jobsListViewContextMenu
             // 
             this.jobsListViewContextMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem21,
             this.jlv_j_openContainingFolderMenuItem,
             this.jlv_j_sep1MenuItem,
+            this.jlv_j_previewMenuItem,
             this.jlv_j_startMenuItem,
             this.jlv_j_stopMenuItem,
             this.jlv_j_sep2MenuItem,
@@ -366,178 +371,178 @@ namespace VisualWget
             // 
             // jlv_j_openContainingFolderMenuItem
             // 
-            this.jlv_j_openContainingFolderMenuItem.Index = 0;
-            this.jlv_j_openContainingFolderMenuItem.Tag = "j";
+            this.jlv_j_openContainingFolderMenuItem.Index = 1;
+            this.jlv_j_openContainingFolderMenuItem.Tag = "sheet";
             this.jlv_j_openContainingFolderMenuItem.Text = "Open Containing Folder";
             this.jlv_j_openContainingFolderMenuItem.Click += new System.EventHandler(this.jlv_j_openContainingFolderMenuItem_Click);
             // 
             // jlv_j_sep1MenuItem
             // 
-            this.jlv_j_sep1MenuItem.Index = 1;
+            this.jlv_j_sep1MenuItem.Index = 2;
             this.jlv_j_sep1MenuItem.Tag = "j";
             this.jlv_j_sep1MenuItem.Text = "-";
             // 
             // jlv_j_startMenuItem
             // 
-            this.jlv_j_startMenuItem.Index = 2;
-            this.jlv_j_startMenuItem.Tag = "j";
+            this.jlv_j_startMenuItem.Index = 4;
+            this.jlv_j_startMenuItem.Tag = "sheet";
             this.jlv_j_startMenuItem.Text = "Start";
             this.jlv_j_startMenuItem.Click += new System.EventHandler(this.jlv_j_startMenuItem_Click);
             // 
             // jlv_j_stopMenuItem
             // 
-            this.jlv_j_stopMenuItem.Index = 3;
-            this.jlv_j_stopMenuItem.Tag = "j";
+            this.jlv_j_stopMenuItem.Index = 5;
+            this.jlv_j_stopMenuItem.Tag = "sheet";
             this.jlv_j_stopMenuItem.Text = "Stop";
             this.jlv_j_stopMenuItem.Click += new System.EventHandler(this.jlv_j_stopMenuItem_Click);
             // 
             // jlv_j_sep2MenuItem
             // 
-            this.jlv_j_sep2MenuItem.Index = 4;
+            this.jlv_j_sep2MenuItem.Index = 6;
             this.jlv_j_sep2MenuItem.Tag = "j";
             this.jlv_j_sep2MenuItem.Text = "-";
             // 
             // jlv_j_moveUpMenuItem
             // 
-            this.jlv_j_moveUpMenuItem.Index = 5;
-            this.jlv_j_moveUpMenuItem.Tag = "j";
+            this.jlv_j_moveUpMenuItem.Index = 7;
+            this.jlv_j_moveUpMenuItem.Tag = "sheet";
             this.jlv_j_moveUpMenuItem.Text = "Move Up";
             this.jlv_j_moveUpMenuItem.Click += new System.EventHandler(this.jlv_j_moveUpMenuItem_Click);
             // 
             // jlv_j_moveDownMenuItem
             // 
-            this.jlv_j_moveDownMenuItem.Index = 6;
-            this.jlv_j_moveDownMenuItem.Tag = "j";
+            this.jlv_j_moveDownMenuItem.Index = 8;
+            this.jlv_j_moveDownMenuItem.Tag = "sheet";
             this.jlv_j_moveDownMenuItem.Text = "Move Down";
             this.jlv_j_moveDownMenuItem.Click += new System.EventHandler(this.jlv_j_moveDownMenuItem_Click);
             // 
             // jlv_j_sep3MenuItem
             // 
-            this.jlv_j_sep3MenuItem.Index = 7;
+            this.jlv_j_sep3MenuItem.Index = 9;
             this.jlv_j_sep3MenuItem.Tag = "j";
             this.jlv_j_sep3MenuItem.Text = "-";
             // 
             // jlv_j_removeMenuItem
             // 
-            this.jlv_j_removeMenuItem.Index = 8;
-            this.jlv_j_removeMenuItem.Tag = "j";
+            this.jlv_j_removeMenuItem.Index = 10;
+            this.jlv_j_removeMenuItem.Tag = "sheet";
             this.jlv_j_removeMenuItem.Text = "Remove...";
             this.jlv_j_removeMenuItem.Click += new System.EventHandler(this.jlv_j_removeMenuItem_Click);
             // 
             // jlv_j_sep4MenuItem
             // 
-            this.jlv_j_sep4MenuItem.Index = 9;
+            this.jlv_j_sep4MenuItem.Index = 11;
             this.jlv_j_sep4MenuItem.Tag = "j";
             this.jlv_j_sep4MenuItem.Text = "-";
             // 
             // jlv_j_exportMenuItem
             // 
-            this.jlv_j_exportMenuItem.Index = 10;
+            this.jlv_j_exportMenuItem.Index = 12;
             this.jlv_j_exportMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.jlv_j_exportWgetBatchFileMenuItem});
-            this.jlv_j_exportMenuItem.Tag = "j";
+            this.jlv_j_exportMenuItem.Tag = "sheet";
             this.jlv_j_exportMenuItem.Text = "Export";
             // 
             // jlv_j_exportWgetBatchFileMenuItem
             // 
             this.jlv_j_exportWgetBatchFileMenuItem.Index = 0;
-            this.jlv_j_exportWgetBatchFileMenuItem.Tag = "j";
+            this.jlv_j_exportWgetBatchFileMenuItem.Tag = "sheet";
             this.jlv_j_exportWgetBatchFileMenuItem.Text = "Wget Batch File...";
             this.jlv_j_exportWgetBatchFileMenuItem.Click += new System.EventHandler(this.jlv_j_exportWgetBatchFileMenuItem_Click);
             // 
             // jlv_j_sep5MenuItem
             // 
-            this.jlv_j_sep5MenuItem.Index = 11;
+            this.jlv_j_sep5MenuItem.Index = 13;
             this.jlv_j_sep5MenuItem.Tag = "j";
             this.jlv_j_sep5MenuItem.Text = "-";
             // 
             // jlv_j_editMultipleMenuItem
             // 
-            this.jlv_j_editMultipleMenuItem.Index = 12;
+            this.jlv_j_editMultipleMenuItem.Index = 14;
             this.jlv_j_editMultipleMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.jlv_j_setDownloadDirectoryMenuItem,
             this.jlv_j_setHttpRefererMenuItem});
-            this.jlv_j_editMultipleMenuItem.Tag = "j";
+            this.jlv_j_editMultipleMenuItem.Tag = "sheet";
             this.jlv_j_editMultipleMenuItem.Text = "Edit Multiple";
             // 
             // jlv_j_setDownloadDirectoryMenuItem
             // 
             this.jlv_j_setDownloadDirectoryMenuItem.Index = 0;
-            this.jlv_j_setDownloadDirectoryMenuItem.Tag = "j";
+            this.jlv_j_setDownloadDirectoryMenuItem.Tag = "sheet";
             this.jlv_j_setDownloadDirectoryMenuItem.Text = "Set Download Directory...";
             this.jlv_j_setDownloadDirectoryMenuItem.Click += new System.EventHandler(this.jlv_j_setDownloadDirectoryMenuItem_Click);
             // 
             // jlv_j_setHttpRefererMenuItem
             // 
             this.jlv_j_setHttpRefererMenuItem.Index = 1;
-            this.jlv_j_setHttpRefererMenuItem.Tag = "j";
+            this.jlv_j_setHttpRefererMenuItem.Tag = "sheet";
             this.jlv_j_setHttpRefererMenuItem.Text = "Set HTTP Referer...";
             this.jlv_j_setHttpRefererMenuItem.Click += new System.EventHandler(this.jlv_j_setHttpRefererMenuItem_Click);
             // 
             // jlv_j_editMenuItem
             // 
-            this.jlv_j_editMenuItem.Index = 13;
-            this.jlv_j_editMenuItem.Tag = "j";
+            this.jlv_j_editMenuItem.Index = 15;
+            this.jlv_j_editMenuItem.Tag = "sheet";
             this.jlv_j_editMenuItem.Text = "Edit...";
             this.jlv_j_editMenuItem.Click += new System.EventHandler(this.jlv_j_editMenuItem_Click);
             // 
             // jlv_sep1MenuItem
             // 
-            this.jlv_sep1MenuItem.Index = 14;
+            this.jlv_sep1MenuItem.Index = 16;
             this.jlv_sep1MenuItem.Text = "-";
             // 
             // jlv_h_nameMenuItem
             // 
-            this.jlv_h_nameMenuItem.Index = 15;
+            this.jlv_h_nameMenuItem.Index = 17;
             this.jlv_h_nameMenuItem.Tag = "h";
             this.jlv_h_nameMenuItem.Text = "Name";
             this.jlv_h_nameMenuItem.Click += new System.EventHandler(this.jlv_h_nameMenuItem_Click);
             // 
             // jlv_h_numMenuItem
             // 
-            this.jlv_h_numMenuItem.Index = 16;
+            this.jlv_h_numMenuItem.Index = 18;
             this.jlv_h_numMenuItem.Tag = "h";
             this.jlv_h_numMenuItem.Text = "#";
             this.jlv_h_numMenuItem.Click += new System.EventHandler(this.jlv_h_numMenuItem_Click);
             // 
             // jlv_h_sizeMenuItem
             // 
-            this.jlv_h_sizeMenuItem.Index = 17;
+            this.jlv_h_sizeMenuItem.Index = 19;
             this.jlv_h_sizeMenuItem.Tag = "h";
             this.jlv_h_sizeMenuItem.Text = "Size";
             this.jlv_h_sizeMenuItem.Click += new System.EventHandler(this.jlv_h_sizeMenuItem_Click);
             // 
             // jlv_h_doneMenuItem
             // 
-            this.jlv_h_doneMenuItem.Index = 18;
+            this.jlv_h_doneMenuItem.Index = 20;
             this.jlv_h_doneMenuItem.Tag = "h";
             this.jlv_h_doneMenuItem.Text = "Done";
             this.jlv_h_doneMenuItem.Click += new System.EventHandler(this.jlv_h_doneMenuItem_Click);
             // 
             // jlv_h_statusMenuItem
             // 
-            this.jlv_h_statusMenuItem.Index = 19;
+            this.jlv_h_statusMenuItem.Index = 21;
             this.jlv_h_statusMenuItem.Tag = "h";
             this.jlv_h_statusMenuItem.Text = "Status";
             this.jlv_h_statusMenuItem.Click += new System.EventHandler(this.jlv_h_statusMenuItem_Click);
             // 
             // jlv_h_speedMenuItem
             // 
-            this.jlv_h_speedMenuItem.Index = 20;
+            this.jlv_h_speedMenuItem.Index = 22;
             this.jlv_h_speedMenuItem.Tag = "h";
             this.jlv_h_speedMenuItem.Text = "Speed";
             this.jlv_h_speedMenuItem.Click += new System.EventHandler(this.jlv_h_speedMenuItem_Click);
             // 
             // jlv_h_etaMenuItem
             // 
-            this.jlv_h_etaMenuItem.Index = 21;
+            this.jlv_h_etaMenuItem.Index = 23;
             this.jlv_h_etaMenuItem.Tag = "h";
             this.jlv_h_etaMenuItem.Text = "ETA";
             this.jlv_h_etaMenuItem.Click += new System.EventHandler(this.jlv_h_etaMenuItem_Click);
             // 
             // jlv_h_noteMenuItem
             // 
-            this.jlv_h_noteMenuItem.Index = 22;
+            this.jlv_h_noteMenuItem.Index = 24;
             this.jlv_h_noteMenuItem.Tag = "h";
             this.jlv_h_noteMenuItem.Text = "Note";
             this.jlv_h_noteMenuItem.Click += new System.EventHandler(this.jlv_h_noteMenuItem_Click);
@@ -1089,21 +1094,22 @@ namespace VisualWget
             this.panel1.Controls.Add(this.splitter1);
             this.panel1.Controls.Add(this.logTextBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 31);
+            this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(738, 432);
+            this.panel1.Size = new System.Drawing.Size(738, 438);
             this.panel1.TabIndex = 1;
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.toolBar1);
             this.panel2.Controls.Add(this.AnimatedGifPictureBox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(738, 214);
+            this.panel2.Size = new System.Drawing.Size(738, 220);
             this.panel2.TabIndex = 0;
             // 
             // AnimatedGifPictureBox
@@ -1118,7 +1124,7 @@ namespace VisualWget
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitter1.Location = new System.Drawing.Point(0, 214);
+            this.splitter1.Location = new System.Drawing.Point(0, 220);
             this.splitter1.Margin = new System.Windows.Forms.Padding(4);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(738, 4);
@@ -1132,7 +1138,7 @@ namespace VisualWget
             this.logTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.logTextBox.ForeColor = System.Drawing.SystemColors.InfoText;
             this.logTextBox.HideSelection = false;
-            this.logTextBox.Location = new System.Drawing.Point(0, 218);
+            this.logTextBox.Location = new System.Drawing.Point(0, 224);
             this.logTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
@@ -1158,7 +1164,7 @@ namespace VisualWget
             this.toolStripButton3,
             this.toolStripSeparator3,
             this.toolStripButton4});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 31);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(738, 25);
@@ -1185,6 +1191,11 @@ namespace VisualWget
             this.btnImportSheets.Text = "toolStripButton2";
             this.btnImportSheets.Click += new System.EventHandler(this.btnImportSheets_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // btnPreview
             // 
             this.btnPreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1203,16 +1214,6 @@ namespace VisualWget
             this.btnPDF.Size = new System.Drawing.Size(23, 22);
             this.btnPDF.Text = "toolStripButton1";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1222,9 +1223,15 @@ namespace VisualWget
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButton2
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Enabled = false;
             this.toolStripButton2.Image = global::QuickPrint.Properties.Resources.MainToolbar_MoveUp;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
@@ -1254,15 +1261,28 @@ namespace VisualWget
             this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton4.Text = "toolStripButton4";
             // 
+            // jlv_j_previewMenuItem
+            // 
+            this.jlv_j_previewMenuItem.Index = 3;
+            this.jlv_j_previewMenuItem.Tag = "sheet";
+            this.jlv_j_previewMenuItem.Text = "Preview";
+            this.jlv_j_previewMenuItem.Click += new System.EventHandler(this.jlv_j_previewMenuItem_Click);
+            // 
+            // menuItem21
+            // 
+            this.menuItem21.Index = 0;
+            this.menuItem21.Tag = "sheet";
+            this.menuItem21.Text = "Open In AutoCAD";
+            this.menuItem21.Click += new System.EventHandler(this.menuItem21_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(738, 491);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusBar1);
-            this.Controls.Add(this.toolBar1);
+            this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Location = new System.Drawing.Point(20, 15);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -1434,5 +1454,7 @@ namespace VisualWget
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.MenuItem jlv_j_previewMenuItem;
+        private System.Windows.Forms.MenuItem menuItem21;
     }
 }
