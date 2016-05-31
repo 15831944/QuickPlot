@@ -337,6 +337,7 @@
     <None Include="Resources\refresh2.png" />
     <None Include="Resources\pdf.png" />
     <None Include="Resources\pdf32.png" />
+    <None Include="Resources\printer_icon_16x16_pixels.gif" />
     <Content Include="Resources\splash.png" />
   </ItemGroup>
   <ItemGroup>

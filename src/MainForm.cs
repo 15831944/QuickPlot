@@ -884,6 +884,21 @@ namespace VisualWget
           toolStrip1.Items.Add(host2);
           SimulateRestartBackgroundWorker.DoWork += new DoWorkEventHandler(SimulateRestartBackgroundWorker_DoWork);
           this.SimulateRestartBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.SimulateRestartBackgroundWorker_RunWorkerCompleted);
+
+            // printer Combobox
+          ComboBox printerCombobox = new ComboBox();
+          ToolStripControlHost host3 = new ToolStripControlHost(printerCombobox) { Alignment = ToolStripItemAlignment.Right,
+          Margin = new Padding(0,0,10,0), Text = "(Printers)"};
+          toolStrip1.Items.Add(host3);
+          // CT Combobox
+          ComboBox ctbCombobox = new ComboBox();
+          ToolStripControlHost host4 = new ToolStripControlHost(ctbCombobox)
+          {
+              Alignment = ToolStripItemAlignment.Right,
+              Margin = new Padding(0, 0, 10, 0),
+              Text = "(CTBs)"
+          };
+          toolStrip1.Items.Add(host4);
         }
 
         private void AdvancedBehaviorFancyToggleSwitch_CheckedChanged(object sender, System.EventArgs e)
