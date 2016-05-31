@@ -10,5 +10,10 @@ namespace QuickPrint.AutoCAD
 {
     internal class Utils
     {
+        public static string[] LayoutsFromDWG(AcadDocument doc)
+        { 
+
+        
+        }
     }
 }

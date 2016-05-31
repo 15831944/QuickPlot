@@ -17,8 +17,8 @@
 
 # Main menu
 000001 = Drawings
-000002 =   New...
-000003 =   New Multiple...
+000002 =   New Sheet...
+000003 =   Import Sheets...
 000004 =   Edit...
 000005 =   Remove...
 000006 =   Cleanup...
@@ -94,7 +94,7 @@
 000070 = Cancel
 
 # Toolbar
-000071 = New
+000071 = New Sheet
 000072 = Edit
 000073 = Remove
 000074 = Start
@@ -298,7 +298,7 @@
 000243 = System sounds
 000244 = Play sound when each download has been finished
 000245 = Play sound when all downloads have been finished
-000246 = New Multiple
+000246 = Import Sheets
 000247 = Resuming
 000248 = Edit Multiple
 000249 = Set Download Directory...

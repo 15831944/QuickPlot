@@ -79,6 +79,15 @@
     <Compile Include="Components\ISheetSetPlot.cs" />
     <Compile Include="Components\Sheet.cs" />
     <Compile Include="Components\SheetSet.cs" />
+    <Compile Include="Forms\DrawingListView\DrawingListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SheetDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SheetDialog.Designer.cs">
+      <DependentUpon>SheetDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="CTB\Crc\CRC32.cs" />
     <Compile Include="CTB\Crc\CrcCalculatorStream.cs" />
     <Compile Include="CTB\CTBColor.cs" />
@@ -171,6 +180,10 @@
     <EmbeddedResource Include="AutoShutdownPrompt.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AutoShutdownPrompt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SheetDialog.resx">
+      <DependentUpon>SheetDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PlotConfigUIBase.resx">
       <DependentUpon>PlotConfigUIBase.cs</DependentUpon>

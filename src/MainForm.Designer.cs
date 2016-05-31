@@ -144,6 +144,7 @@ namespace VisualWget
             this.menuItem8 = new System.Windows.Forms.MenuItem();
             this.menuItem9 = new System.Windows.Forms.MenuItem();
             this.menuItem14 = new System.Windows.Forms.MenuItem();
+            this.menuItem19 = new System.Windows.Forms.MenuItem();
             this.menuItem10 = new System.Windows.Forms.MenuItem();
             this.menuItem11 = new System.Windows.Forms.MenuItem();
             this.menuItem16 = new System.Windows.Forms.MenuItem();
@@ -158,6 +159,7 @@ namespace VisualWget
             this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.menuItem20 = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -945,7 +947,8 @@ namespace VisualWget
             this.menuItem6,
             this.menuItem7,
             this.menuItem8,
-            this.menuItem14});
+            this.menuItem14,
+            this.menuItem19});
             this.menuItem3.Text = "AutoCAD";
             // 
             // menuItem2
@@ -996,6 +999,12 @@ namespace VisualWget
             this.menuItem14.Text = "Plot To Device";
             this.menuItem14.Click += new System.EventHandler(this.menuItem14_Click);
             // 
+            // menuItem19
+            // 
+            this.menuItem19.Index = 7;
+            this.menuItem19.Text = "Set Focus on AutoCAD";
+            this.menuItem19.Click += new System.EventHandler(this.menuItem19_Click);
+            // 
             // menuItem10
             // 
             this.menuItem10.Index = 1;
@@ -1041,7 +1050,8 @@ namespace VisualWget
             // 
             this.menuItem17.Index = 2;
             this.menuItem17.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem18});
+            this.menuItem18,
+            this.menuItem20});
             this.menuItem17.Text = "Dialogs";
             // 
             // menuItem18
@@ -1100,6 +1110,12 @@ namespace VisualWget
             this.logTextBox.WordWrap = false;
             this.logTextBox.Enter += new System.EventHandler(this.logTextBox_Enter);
             this.logTextBox.Leave += new System.EventHandler(this.logTextBox_Leave);
+            // 
+            // menuItem20
+            // 
+            this.menuItem20.Index = 1;
+            this.menuItem20.Text = "New Sheet Dialog";
+            this.menuItem20.Click += new System.EventHandler(this.menuItem20_Click);
             // 
             // MainForm
             // 
@@ -1260,5 +1276,7 @@ namespace VisualWget
         private System.Windows.Forms.MenuItem menuItem16;
         private System.Windows.Forms.MenuItem menuItem17;
         private System.Windows.Forms.MenuItem menuItem18;
+        private System.Windows.Forms.MenuItem menuItem19;
+        private System.Windows.Forms.MenuItem menuItem20;
     }
 }

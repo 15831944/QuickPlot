@@ -2906,7 +2906,10 @@ namespace VisualWget
 
         private void jobsNewMenuItem_Click(object sender, EventArgs e)
         {
-            NewJob("");
+           // NewJob("");
+            SheetDialog sheetDlg = new SheetDialog();
+            sheetDlg.StartPosition = FormStartPosition.CenterParent;
+            sheetDlg.ShowDialog();
         }
 
         private void jobsEditMenuItem_Click(object sender, EventArgs e)
@@ -3137,11 +3140,17 @@ namespace VisualWget
 
             if (s == "newToolBarButton")
             {
-                NewJob("");
+                //NewJob("");
+                SheetDialog sheetDlg = new SheetDialog();
+                sheetDlg.StartPosition = FormStartPosition.CenterParent;
+                sheetDlg.ShowDialog();
             }
             else if (s == "newMultipleToolBarButton")
             {
-                NewMultipleJobs();
+                //NewMultipleJobs();
+                SheetDialog sheetDlg = new SheetDialog();
+                sheetDlg.StartPosition = FormStartPosition.CenterParent;
+                sheetDlg.ShowDialog();
             }
             else if (s == "editToolBarButton")
             {
@@ -5312,6 +5321,41 @@ namespace VisualWget
         {
             NewCTBFileDialog nCtbDialg = new NewCTBFileDialog();
             nCtbDialg.ShowDialog();
+        }
+
+        private void menuItem19_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                object obj = Marshal.GetActiveObject("AutoCAD.Application.17");
+                if (obj != null)
+                {
+                    gbl_app = obj as AcadApplication;
+                    try
+                    {
+                        AcadApp.SetFocus(gbl_app.HWND);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    logTextBox.Text = "AutoCAD chưa khởi động hoặc không đúng phiên bản!";
+                }
+            }
+            catch
+            {
+                logTextBox.Text = "AutoCAD chưa khởi động hoặc không đúng phiên bản!";
+            }
+        }
+
+        private void menuItem20_Click(object sender, EventArgs e)
+        {
+            SheetDialog sheetdialog = new SheetDialog();
+            sheetdialog.StartPosition = FormStartPosition.CenterParent;
+            sheetdialog.ShowDialog();
         }
 
     }
